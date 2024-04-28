@@ -1,0 +1,73 @@
+.SelectElsWrapper {
+    color: #333;
+    background-color: #b0b0b0;
+    border-radius: 4px;
+    margin-bottom: 3em;
+    padding: 1em;
+}
+
+.SelectElsWrapper form {
+    width: 49%;
+}
+
+.SelectElsWrapper form select {
+    width: 100%;
+    font-size: 16px;
+}
+
+& .termEls {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2%;
+
+    &:first-of-type {
+        margin-bottom: 1.5em;
+        gap: 2%;
+    }
+
+    & .YearsQuarterLists {
+        width: 49%;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 2%;
+
+        & .explainSentence {
+            font-size: 14px;
+            line-height: 1.4;
+            border-left: 8px solid;
+            padding-left: .5em;
+            margin-bottom: .5em;
+        }
+    }
+}
+
+.termEls .YearsQuarterLists select {
+    &:first-of-type {
+        margin-bottom: .5em;
+    }
+}
+
+& .termCaption {
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 2em;
+}
+
+& .termCaption a {
+    display: block;
+    width: fit-content;
+}
+
+@media screen and (min-width: 700px) {
+    .SelectElsWrapper {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        gap: 2%;
+    }
+
+    .SelectElsWrapper form {
+        width: 23.5%;
+    }
+}
