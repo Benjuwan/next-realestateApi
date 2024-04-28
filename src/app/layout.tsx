@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { CompareSortGraphActionFragment } from "./providers/compare/CompareSortGraphAction";
+import { CityNameFragment } from "./providers/filter/CityName";
+import { GetFetchDataContextFragment } from "./providers/filter/GetFetchData";
+import { GetFetchPrefCodeFragment } from "./providers/filter/GetFetchPrefCode";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +15,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja">
+      <body>
+        <GetFetchDataContextFragment>
+          <CityNameFragment>
+            <GetFetchPrefCodeFragment>
+              <CompareSortGraphActionFragment>
+                {children}
+              </CompareSortGraphActionFragment>
+            </GetFetchPrefCodeFragment>
+          </CityNameFragment>
+        </GetFetchDataContextFragment>
+      </body>
     </html>
   );
 }
