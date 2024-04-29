@@ -2,12 +2,14 @@ import selectElsStyles from "../../styles/selectEls.module.css";
 import { memo } from "react";
 import SelectPrefs from "./SelectPrefs";
 import { SelectTerm } from "./SelectTerm";
+import PrefSelect from "./PrefSelect";
 
 function SelectEls() {
     return (
         <div className={selectElsStyles.SelectElsWrapper}>
             <div className={selectElsStyles.termEls}>
-                <SelectPrefs />
+                {/* <SelectPrefs initialPrefCode="01" /> */}
+                <PrefSelect />
             </div>
             <div className={selectElsStyles.termEls}>
                 {/* <SelectTerm SelectTermClassName={selectElsStyles.YearsQuarterLists_From} explainSentence="計測「開始」期間" /> */}
