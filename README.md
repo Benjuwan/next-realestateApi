@@ -1,4 +1,4 @@
-# realEstateApi
+# Next.js-realEstateApi
 
 [https://github.com/Benjuwan/realEstateApi](https://github.com/Benjuwan/realEstateApi)で制作したappの`Next.js`ver（※使用していたAPIの廃止に伴って`Next.js`で新規作成）
 
