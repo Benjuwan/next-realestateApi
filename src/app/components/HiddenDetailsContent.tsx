@@ -1,5 +1,5 @@
 import { memo, FC } from "react";
-import { ContentsItems } from "./ContentItmes";
+import { ContentsItems } from "./layout/ContentItmes";
 import { useViewDetails } from "../hooks/useViewDetails";
 import { estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 
