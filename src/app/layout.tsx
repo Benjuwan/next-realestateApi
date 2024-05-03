@@ -3,6 +3,8 @@ import { CompareSortGraphActionFragment } from "./providers/compare/CompareSortG
 import { CityNameFragment } from "./providers/filter/CityName";
 import { GetFetchDataContextFragment } from "./providers/filter/GetFetchData";
 import { GetFetchPrefCodeFragment } from "./providers/filter/GetFetchPrefCode";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "不動産取引データ取得機能",
@@ -21,7 +23,9 @@ export default function RootLayout({
           <CityNameFragment>
             <GetFetchPrefCodeFragment>
               <CompareSortGraphActionFragment>
-                {children}
+                <Suspense fallback={<Loading />}>
+                  {children}
+                </Suspense>
               </CompareSortGraphActionFragment>
             </GetFetchPrefCodeFragment>
           </CityNameFragment>

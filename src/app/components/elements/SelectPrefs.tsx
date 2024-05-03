@@ -11,18 +11,21 @@ export default function SelectPrefs({ initialPrefCode }: { initialPrefCode: stri
 
     useEffect(() => {
         if (initialPrefCode) {
-            const resObjDataAry = get_SelectElValue_CityCode(initialPrefCode);
-            resObjDataAry.then((resObjData) => setCities((_prevCities) => resObjData));
+            const fetchCityCode = async () => {
+                const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(initialPrefCode);
+                setCities((_prevCities) => resObjDataAry);
+            }
+            fetchCityCode();
         }
     }, [initialPrefCode]);
 
     return (
         <>
             <form>
-                <select name="" id="prefLists" onChange={(event) => {
+                <select name="" id="prefLists" onChange={async (event) => {
                     const newPrefCode: string = (event.target as HTMLSelectElement).value;
-                    const resObjDataAry = get_SelectElValue_CityCode(newPrefCode);
-                    resObjDataAry.then((resObjData) => setCities((_prevCities) => resObjData));
+                    const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(newPrefCode);
+                    setCities((_prevCities) => resObjDataAry);
                 }}>
                     {prefcodeData.map((data) => (
                         <option value={data.prefcode} key={data.prefcode}>{data.prefJaName}</option>
