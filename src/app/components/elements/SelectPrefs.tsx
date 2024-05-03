@@ -2,8 +2,8 @@
 
 import { prefcodeData } from "@/app/components/layout/prefcodeData";
 import React, { useEffect, useState } from 'react';
-import SelectCities from './SelectCities';
 import { cityAry } from "@/app/ts/cityDataAryEls";
+import SelectCities from './SelectCities';
 import { get_SelectElValue_CityCode } from "../../server-action/getSelectElValueCityCode";
 
 export default function SelectPrefs({ initialPrefCode }: { initialPrefCode: string }) {
@@ -13,7 +13,6 @@ export default function SelectPrefs({ initialPrefCode }: { initialPrefCode: stri
         if (initialPrefCode) {
             const resObjDataAry = get_SelectElValue_CityCode(initialPrefCode);
             resObjDataAry.then((resObjData) => setCities((_prevCities) => resObjData));
-
         }
     }, [initialPrefCode]);
 
