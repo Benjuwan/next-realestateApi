@@ -1,3 +1,5 @@
+"use client"
+
 import { FC, memo, useState, useEffect } from "react"
 
 type SelectTermType = {
