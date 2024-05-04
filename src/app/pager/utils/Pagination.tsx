@@ -1,5 +1,7 @@
-import { FC, memo, useState, useEffect, useContext } from "react";
+"use client"
+
 import styled from "styled-components";
+import { FC, memo, useState, useEffect, useContext } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 
 type PaginationType = {

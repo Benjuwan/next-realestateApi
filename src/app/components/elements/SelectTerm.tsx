@@ -1,13 +1,14 @@
 "use client"
 
-import { FC, memo, useState, useEffect } from "react"
+import { memo, useState, useEffect } from "react"
 
 type SelectTermType = {
     SelectTermClassName: string;
     explainSentence?: string;
 }
 
-export const SelectTerm: FC<SelectTermType> = memo(({ SelectTermClassName, explainSentence }) => {
+function SelectTerm({ props }: { props: SelectTermType }) {
+    const { SelectTermClassName, explainSentence } = props;
     const startYear: number = 1999;
     const getPresentYear: number = new Date().getFullYear();
 
@@ -21,8 +22,8 @@ export const SelectTerm: FC<SelectTermType> = memo(({ SelectTermClassName, expla
     const selectQuarter: number[] = [1, 2, 3, 4]; // 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月
 
     return (
-        <form action="" className={`YearsQuarterLists ${SelectTermClassName}`}>
-            {explainSentence && <p className="explainSentence">{explainSentence}</p>}
+        <div className={SelectTermClassName}>
+            {explainSentence && <p>{explainSentence}</p>}
             <select name="" id="yearsLists">
                 {isSelectYears.map((yearsEls, i) => (
                     <option key={i} value={yearsEls}>{yearsEls}</option>
@@ -33,6 +34,8 @@ export const SelectTerm: FC<SelectTermType> = memo(({ SelectTermClassName, expla
                     <option key={i} value={quarterEl}>{quarterEl}</option>
                 ))}
             </select>
-        </form>
+        </div>
     );
-});
+}
+
+export default memo(SelectTerm);

@@ -6,8 +6,6 @@ import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 type Default = {
     isGetFetchData: estateInfoJsonDataContents[];
     setGetFetchData: React.Dispatch<React.SetStateAction<estateInfoJsonDataContents[]>>;
-    isLoading: boolean;
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isPagers: number;
     setPagers: React.Dispatch<React.SetStateAction<number>>;
     isOffSet: number;
@@ -29,9 +27,6 @@ export const GetFetchDataContextFragment: FC<fragmentType> = (props) => {
     /* データフェッチしたコンテンツデータの格納用配列 State */
     const [isGetFetchData, setGetFetchData] = useState<estateInfoJsonDataContents[]>([]);
 
-    /* データフェッチ時の読み込み状態の State */
-    const [isLoading, setLoading] = useState<boolean>(false);
-
     /* ページャー数の管理用 State */
     const [isPagers, setPagers] = useState<number>(0); // 再レンダリングの度に引数に指定した数値が加算される
 
@@ -44,7 +39,6 @@ export const GetFetchDataContextFragment: FC<fragmentType> = (props) => {
     return (
         <GetFetchDataContext.Provider value={{
             isGetFetchData, setGetFetchData,
-            isLoading, setLoading,
             isPagers, setPagers,
             isOffSet,
             isCurrPager, setCurrPager

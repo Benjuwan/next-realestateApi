@@ -1,5 +1,7 @@
-import { useContext, useState, useEffect, useCallback, memo, FC } from "react";
+"use client"
+
 import styled from "styled-components";
+import { useContext, useState, useEffect, useCallback, memo, FC } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import { InputPagerNum } from "./InputPagerNum";

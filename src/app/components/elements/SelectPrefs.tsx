@@ -21,7 +21,7 @@ export default function SelectPrefs({ initialPrefCode }: { initialPrefCode: stri
 
     return (
         <>
-            <form>
+            <div id="prefListsWrapper">
                 <select name="" id="prefLists" onChange={async (event) => {
                     const newPrefCode: string = (event.target as HTMLSelectElement).value;
                     const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(newPrefCode);
@@ -31,7 +31,7 @@ export default function SelectPrefs({ initialPrefCode }: { initialPrefCode: stri
                         <option value={data.prefcode} key={data.prefcode}>{data.prefJaName}</option>
                     ))}
                 </select>
-            </form>
+            </div>
             <SelectCities cities={cities} />
         </>
     );

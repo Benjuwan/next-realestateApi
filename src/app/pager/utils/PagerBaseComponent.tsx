@@ -1,23 +1,31 @@
-import { useContext, memo, useMemo } from "react";
+"use client"
+
 import styled from "styled-components";
+import { useContext, memo, useEffect, useState } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
-import { SelectEls } from "../../components/elements/SelectEls";
-import { PagerComponent } from "./PagerComponent";
+import { estateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
+import SelectEls from "../../components/elements/SelectEls";
+import PagerComponent from "./PagerComponent";
+import { get_PrefCityYearTerm_TargetValueData } from "@/app/server-action/getPrefCityYearTermTargetValueData";
 
 export const PagerBaseComponent = memo(() => {
-    /* 各種 Context */
-    const { isGetFetchData } = useContext(GetFetchDataContext);
+    const { isGetFetchData, setGetFetchData } = useContext(GetFetchDataContext);
 
-    /* ページャー（コンテンツ数）上限値の決め打ち */
-    const pagerLimitMaxNum: number = useMemo(() => {
-        const getAryLength: number = isGetFetchData.length;
-        return getAryLength;
-    }, [isGetFetchData]);
+    const [pagerLimitMaxNum, setPagerLimitMaxNum] = useState<number>(0);
+
+    // useEffect(() => {
+    //     const fetchTargetValueData = async () => {
+    //         const resObjDataAry: estateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData();
+    //         setPagerLimitMaxNum((_prevPagerLimitMaxNum) => resObjDataAry.length);
+    //         setGetFetchData((_prevGetFetchData) => resObjDataAry);
+    //     }
+    //     fetchTargetValueData();
+    // }, [isGetFetchData]);
 
     return (
         <PagerBaseElm>
-            <SelectEls pagerName="pager" />
-            <PagerComponent pagerLimitMaxNum={pagerLimitMaxNum} />
+            <SelectEls />
+            <PagerComponent props={{ pagerLimitMaxNum: pagerLimitMaxNum }} />
         </PagerBaseElm>
     );
 });

@@ -1,0 +1,34 @@
+.LoadingEl {
+    overflow: hidden;
+    letter-spacing: .25em;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 2;
+    display: grid;
+    place-content: center;
+    height: 100vh;
+
+    @media screen and (min-width: 700px) {
+        font-size: 18px;
+    }
+
+    & span.LoadingElChildren {
+        display: inline-block;
+        transform: translateY(1em);
+
+        &.txtFrames {
+            animation: txtFrames .75s infinite ease-in-out;
+        }
+    }
+}
+
+@keyframes txtFrames {
+    0% {
+        transform: translateY(1em)
+    }
+
+    50%,
+    100% {
+        transform: translateY(0)
+    }
+}
