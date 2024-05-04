@@ -2,7 +2,7 @@ import { memo, useContext } from "react";
 import styled from "styled-components";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { CityName } from "../../providers/filter/CityName";
-import { LoadingEl } from "../../components/elements/LoadingEl";
+import { LoadingEl } from "../../utils/LoadingEl";
 import { FilterContentsCatClick } from "./FilterContentsCatClick";
 import { FilterActionBtns } from "./FilterActionBtns";
 import { AverageNumber } from "./AverageNumber";

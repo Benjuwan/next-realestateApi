@@ -1,58 +1,38 @@
-import { memo, useContext, useState, FC, useEffect } from "react";
+"use client"
+
 import styled from "styled-components";
+import { memo, useContext } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
-import { ChangePagerStyle } from "./ChangePagerStyle";
-import { LoadingEl } from "../../components/elements/LoadingEl";
 import { ContentsNumber } from "./ContentsNumber";
 import { Pagination } from "./Pagination";
 import { PagerPages } from "./PagerPages";
-import { PagerIncDec } from "./PagerIncDec";
 
 type PagerComponentProps = {
     pagerLimitMaxNum: number;
 }
 
-export const PagerComponent: FC<PagerComponentProps> = memo((props) => {
+function PagerComponent({ props }: { props: PagerComponentProps }) {
     const { pagerLimitMaxNum } = props;
 
     /* 各種Context */
-    const { isGetFetchData, isPagers, isLoading } = useContext(GetFetchDataContext);
-
-    /* ページャー機能（PagerPages.tsx / PagerIncDec.tsx）の切替用Bool */
-    const [isPagerFrag, setPagerFrag] = useState<boolean>(true);
-
-    useEffect(() => {
-        /* レンダリング時にスクロールトップ */
-        if (isPagerFrag) window.scrollTo(0, 0);
-    }, [isPagers]); // 依存配列 isPagers：ページャー数が変更される度
+    const { isGetFetchData } = useContext(GetFetchDataContext);
 
     return (
         <>
-            {isLoading ? <LoadingEl /> :
+            {isGetFetchData.length > 0 &&
                 <>
-                    {isGetFetchData.length > 0 &&
-                        <>
-                            <div>
-                                <ChangePagerStyle isPagerFrag={isPagerFrag} setPagerFrag={setPagerFrag} />
-                                <ContentsNumber
-                                    pagerLimitMaxNum={pagerLimitMaxNum}
-                                    isPagerFrag={isPagerFrag}
-                                />
-                            </div>
-                            <ContentWrapper>
-                                <Pagination pagerLimitMaxNum={pagerLimitMaxNum} isPagerFrag={isPagerFrag} />
-                                {isPagerFrag ?
-                                    <PagerPages pagerLimitMaxNum={pagerLimitMaxNum} /> :
-                                    <PagerIncDec pagerLimitMaxNum={pagerLimitMaxNum} />
-                                }
-                            </ContentWrapper>
-                        </>
-                    }
+                    <ContentsNumber pagerLimitMaxNum={pagerLimitMaxNum} />
+                    <ContentWrapper>
+                        <Pagination pagerLimitMaxNum={pagerLimitMaxNum} />
+                        <PagerPages pagerLimitMaxNum={pagerLimitMaxNum} />
+                    </ContentWrapper>
                 </>
             }
         </>
     );
-});
+}
+
+export default memo(PagerComponent);
 
 const ContentWrapper = styled.div`
 /* padding: 0 2em; */
