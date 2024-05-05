@@ -1,13 +1,9 @@
-import { memo, FC } from "react";
-import { ContentsItems } from "./layout/ContentItmes";
-import { useViewDetails } from "../hooks/useViewDetails";
+import { memo } from "react";
 import { estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
+import ContentItmes from "../components/layout/ContentItmes";
+import { useViewDetails } from "../hooks/useViewDetails";
 
-type hiddenDetailsContentType = {
-    aryEl: estateInfoJsonDataContents;
-}
-
-export const HiddenDetailsContent: FC<hiddenDetailsContentType> = memo(({ aryEl }) => {
+function HiddenDetailsContent({ aryEl }: { aryEl: estateInfoJsonDataContents }) {
     /* 詳細情報の表示機能（モーダル）*/
     const { ViewDetails } = useViewDetails();
 
@@ -16,9 +12,11 @@ export const HiddenDetailsContent: FC<hiddenDetailsContentType> = memo(({ aryEl 
             <button type="button" className="detailsViewBtn" onClick={((btnEl) => ViewDetails(btnEl.currentTarget))}>詳細情報</button>
             <div className="details" onClick={((divEl) => ViewDetails(divEl.currentTarget))}>
                 <div className="contentsWrapper">
-                    <ContentsItems aryEl={aryEl} />
+                    <ContentItmes aryEl={aryEl} />
                 </div>
             </div>
         </>
     );
-});
+}
+
+export default memo(HiddenDetailsContent);

@@ -55,10 +55,6 @@
     margin-bottom: 2em;
 }
 
-.termEls p {
-    margin: 0;
-}
-
 @media screen and (min-width: 700px) {
     .SelectElsWrapper {
         display: flex;

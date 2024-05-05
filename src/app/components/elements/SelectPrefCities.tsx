@@ -2,9 +2,9 @@
 /* 親コンポーネント（SelectEls.tsx）でクライアントコンポーネントの宣言済みなので再度 "use client" は不要 */
 
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
-import { prefcodeData } from "@/app/components/layout/prefcodeData";
 import React, { useContext, useEffect, useState, ChangeEvent, memo } from 'react';
 import { cityAry } from "@/app/ts/cityDataAryEls";
+import { prefcodeData } from "@/app/components/layout/prefcodeData";
 import { get_SelectElValue_CityCode } from "../../server-action/getSelectElValueCityCode";
 
 function SelectPrefCities() {

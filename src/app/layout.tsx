@@ -1,3 +1,4 @@
+import './globals.css'
 import type { Metadata } from "next";
 import { CompareSortGraphActionFragment } from "./providers/compare/CompareSortGraphAction";
 import { CityNameFragment } from "./providers/filter/CityName";

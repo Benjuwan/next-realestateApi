@@ -1,14 +1,8 @@
-import { memo, FC } from "react";
+import { memo } from "react";
 import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import { useToLocalString } from "../../hooks/useToLocalString";
 
-type ContentItemsProps = {
-    aryEl: estateInfoJsonDataContents;
-}
-
-export const ContentsItems: FC<ContentItemsProps> = memo((props) => {
-    const { aryEl } = props;
-
+function ContentsItems({ aryEl }: { aryEl: estateInfoJsonDataContents }) {
     /* fee を3桁区切りに */
     const { ToLocalString } = useToLocalString();
 
@@ -48,4 +42,6 @@ export const ContentsItems: FC<ContentItemsProps> = memo((props) => {
             </div>
         </>
     );
-});
+}
+
+export default memo(ContentsItems);
