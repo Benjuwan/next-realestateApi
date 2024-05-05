@@ -1,5 +1,6 @@
 export type estateInfoJsonData = {
-    data: Array<estateInfoJsonDataContents>
+    status: string;
+    data: estateInfoJsonDataContents[];
 }
 
 export type estateInfoJsonDataContents = {
@@ -23,7 +24,11 @@ export type estateInfoJsonDataContents = {
     Renovation: string;
     Structure: string;
     TradePrice: string;
+    PricePerUnit?: string;
+    UnitPrice?: string;
     Type: string;
     TotalFloorArea?: string;
     Use: string;
+    Breadth?: string;
+    Remarks?: string;
 }

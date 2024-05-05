@@ -15,7 +15,7 @@
     font-size: 16px;
 }
 
-& .termEls {
+.termEls {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
@@ -48,15 +48,15 @@
     }
 }
 
-& .termCaption {
+.termCaption {
     width: 100%;
+    margin: 0;
     font-size: 12px;
     margin-bottom: 2em;
 }
 
-& .termCaption a {
-    display: block;
-    width: fit-content;
+.termEls p {
+    margin: 0;
 }
 
 @media screen and (min-width: 700px) {
