@@ -1,22 +1,13 @@
-"use client"
-
 import styled from "styled-components";
-import { useContext, useState, useEffect, useCallback, memo, FC } from "react";
+import { useContext, useState, useEffect, memo } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
-import { InputPagerNum } from "./InputPagerNum";
-import { BtnComponent } from "./BtnComponent";
-import { HiddenDetailsContent } from "../../components/HiddenDetailsContent";
+import HiddenDetailsContent from "@/app/utils/HiddenDetailsContent";
+import BtnComponent from "./BtnComponent";
 import { usePager } from "../../hooks/usePager";
 import { useToLocalString } from "../../hooks/useToLocalString";
 
-type PagerPagesType = {
-    pagerLimitMaxNum: number;
-}
-
-export const PagerPages: FC<PagerPagesType> = memo((props) => {
-    const { pagerLimitMaxNum } = props;
-
+function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     /* 各種Context */
     const { isGetFetchData, isPagers, isOffSet } = useContext(GetFetchDataContext);
 
@@ -25,14 +16,14 @@ export const PagerPages: FC<PagerPagesType> = memo((props) => {
 
     /* ページャー機能：splice メソッドで処理 */
     const [isPagerContents, setPagerContents] = useState<estateInfoJsonDataContents[]>([]);
-    const setPagerContentsFrag: (fragStart?: number, fragFinish?: number) => void = useCallback((
-        fragStart: number = isPagers, // 始点（fragStart）：ページャー数
-        fragFinish: number = isOffSet // 終点（fragFinish）：オフセット数
+    const setPagerContentsFrag: (fragStart: number, fragFinish: number) => void = (
+        fragStart: number, // 始点（fragStart）：ページャー数
+        fragFinish: number // 終点（fragFinish）：オフセット数
     ) => {
         const shallowCopy: estateInfoJsonDataContents[] = [...isGetFetchData];
         const splicedContents: estateInfoJsonDataContents[] = shallowCopy.splice(fragStart, fragFinish);
         setPagerContents((_prevPagerContents) => splicedContents);
-    }, [isPagers]);
+    }
 
     useEffect(() => {
         /* ページャー機能：ページ送り */
@@ -42,7 +33,7 @@ export const PagerPages: FC<PagerPagesType> = memo((props) => {
                 const remandNum: number = pagerLimitMaxNum - isPagers;
                 setPagerContentsFrag(isPagers, remandNum); // 終点：残りのコンテンツ数
             } else {
-                setPagerContentsFrag();
+                setPagerContentsFrag(isPagers, isOffSet);
             }
         }
     }, [isPagers]);
@@ -53,7 +44,6 @@ export const PagerPages: FC<PagerPagesType> = memo((props) => {
 
     return (
         <>
-            <InputPagerNum pagerLimitMaxNum={pagerLimitMaxNum} />
             {isPagerContents.map((el, i) => (
                 <PagerArticleContents key={i}>
                     <h2>{el.Type}</h2>
@@ -70,20 +60,25 @@ export const PagerPages: FC<PagerPagesType> = memo((props) => {
                 </PagerArticleContents>
             ))}
             <div style={{ 'display': 'flex', 'gap': '5%', 'justifyContent': 'space-between', 'width': '100%', 'margin': '0 auto 4em' }}>
-                <BtnComponent btnTxt="PrevBtn"
-                    disabledBool={isPagers <= 0}
-                    classNameTxt="Prev"
-                    ClickEvent={prevPagerPages}
-                />
-                <BtnComponent btnTxt="NextBtn"
+                <BtnComponent props={{
+                    btnTxt: "PrevBtn",
+                    classNameTxt: "Prev",
+                    ClickEvent: prevPagerPages,
+                    disabledBool: isPagers <= 0
+                }} />
+                <BtnComponent props={{
+                    btnTxt: "NextBtn",
+                    classNameTxt: "Next",
+                    ClickEvent: nextPagerPages,
                     /* isPagers >= (pagerLimitMaxNum - isOffSet)：ページャー数が残りの取得予定コンテンツデータ数を超えてしまう場合は操作不可 */
-                    disabledBool={isPagers >= (pagerLimitMaxNum - isOffSet)} classNameTxt="Next"
-                    ClickEvent={nextPagerPages}
-                />
+                    disabledBool: isPagers >= (pagerLimitMaxNum - isOffSet)
+                }} />
             </div>
         </>
     );
-});
+}
+
+export default memo(PagerPages);
 
 const PagerArticleContents = styled.article`
 line-height: 2;

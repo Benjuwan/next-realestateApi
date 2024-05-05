@@ -1,19 +1,10 @@
-"use client"
-
 import styled from "styled-components";
-import { FC, memo, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, memo } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 
-type PaginationType = {
-    pagerLimitMaxNum: number;
-    isPagerFrag?: boolean;
-}
-
-export const Pagination: FC<PaginationType> = memo((props) => {
-    const { pagerLimitMaxNum, isPagerFrag } = props;
-
+function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number; }) {
     /* 各種Context */
-    const { isGetFetchData, setPagers, isOffSet, isCurrPager, setCurrPager } = useContext(GetFetchDataContext);
+    const { setPagers, isOffSet, isCurrPager, setCurrPager } = useContext(GetFetchDataContext);
 
     /* ページ数：コンテンツデータ数をオフセットで分割した数 */
     const [isPagination, setPagination] = useState<number[]>([]);
@@ -24,11 +15,7 @@ export const Pagination: FC<PaginationType> = memo((props) => {
     /* 各ページャー項目の data-pager の値に準じたページを表示及びページ番号を変更 */
     const setPaginationNum: (btnEl: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = (btnEl: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const dataPager: string | null = btnEl.currentTarget.getAttribute('data-pager');
-        if (isPagerFrag) {
-            setPagers((_prevPagerNum) => Number(dataPager));
-        } else {
-            setPagers((_prevPagerNum) => Number(dataPager) + isOffSet); // PagerIncDec.tsx ではオフセット数を加算（随時追加という仕様により初期表示時点でオフセットの1セット目分が表示されているため）
-        }
+        setPagers((_prevPagerNum) => Number(dataPager) + isOffSet); // PagerIncDec.tsx ではオフセット数を加算（随時追加という仕様により初期表示時点でオフセットの1セット目分が表示されているため）
 
         /* 表示中のページ番号を変更 */
         const currPager: string | null = btnEl.currentTarget.textContent
@@ -42,6 +29,8 @@ export const Pagination: FC<PaginationType> = memo((props) => {
             const srcAry: number[] = [];
             let srcNum: number = pagerLimitMaxNum;
 
+            console.log(srcAry, srcNum, pagerLimitMaxNum);
+
             /* 各ページャー項目の data-pager の値を生成（引算用途の上限数値：srcNum が 0 を切るまでオフセット数を倍数していくループ処理）*/
             let Accumuration = 0;
             while (srcNum >= 0) {
@@ -51,6 +40,8 @@ export const Pagination: FC<PaginationType> = memo((props) => {
             }
             setPagerNum((_prevPagerNum) => [...isPagerNum, ...srcAry]); // ページャー数をセット
 
+            console.log(srcAry, srcNum);
+
             const paginationAry: number[] = [];
             for (let i = 1; i <= srcAry.length; i++) {
                 paginationAry.push(i);
@@ -58,9 +49,10 @@ export const Pagination: FC<PaginationType> = memo((props) => {
             setPagination((_prevPagination) => [...isPagination, ...paginationAry]); // ページ数をセット
         }
     }
+
     useEffect(() => {
         basedonOffsetNum_setPagerNum();
-    }, [isGetFetchData]);
+    }, [pagerLimitMaxNum]);
 
     return (
         <Paginations>
@@ -73,7 +65,9 @@ export const Pagination: FC<PaginationType> = memo((props) => {
             )}
         </Paginations>
     );
-});
+}
+
+export default memo(Pagination);
 
 const Paginations = styled.div`
 width: 100%;

@@ -1,11 +1,9 @@
-"use client"
-
 import styled from "styled-components";
 import { memo, useContext } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
-import { ContentsNumber } from "./ContentsNumber";
-import { Pagination } from "./Pagination";
-import { PagerPages } from "./PagerPages";
+import ContentsNumber from "./ContentsNumber";
+import Pagination from "./Pagination";
+import PagerPages from "./PagerPages";
 
 type PagerComponentProps = {
     pagerLimitMaxNum: number;
@@ -14,7 +12,6 @@ type PagerComponentProps = {
 function PagerComponent({ props }: { props: PagerComponentProps }) {
     const { pagerLimitMaxNum } = props;
 
-    /* 各種Context */
     const { isGetFetchData } = useContext(GetFetchDataContext);
 
     return (

@@ -1,14 +1,14 @@
-import { FC, memo } from "react";
 import styled from "styled-components";
+import { memo } from "react";
 
 type btnType = {
     btnTxt: string;
     classNameTxt: string;
-    disabledBool?: boolean;
     ClickEvent: () => void;
+    disabledBool?: boolean;
 }
 
-export const BtnComponent: FC<btnType> = memo((props) => {
+function BtnComponent({ props }: { props: btnType }) {
     const { btnTxt, classNameTxt = 'default', ClickEvent, disabledBool } = props;
 
     return (
@@ -21,7 +21,9 @@ export const BtnComponent: FC<btnType> = memo((props) => {
             {btnTxt}
         </BtnItem>
     );
-});
+}
+
+export default memo(BtnComponent);
 
 const BtnItem = styled.button`
 width: 100%;

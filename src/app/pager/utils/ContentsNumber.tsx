@@ -1,13 +1,7 @@
-import { FC, memo, useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 
-type ContentsNumberType = {
-    pagerLimitMaxNum: number;
-}
-
-export const ContentsNumber: FC<ContentsNumberType> = memo((props) => {
-    const { pagerLimitMaxNum } = props;
-
+function ContentsNumber({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     /* 各種 Context：ページャーのオフセットは isOffSet State で指定 */
     const { isPagers, isOffSet } = useContext(GetFetchDataContext);
 
@@ -26,4 +20,6 @@ export const ContentsNumber: FC<ContentsNumberType> = memo((props) => {
             {isPagers + 1} - {isPagers > pagerLimitMaxNum - isOffSet ? isCtrlPagerNum : isPagers + isOffSet}件 / {pagerLimitMaxNum}
         </p>
     );
-});
+}
+
+export default memo(ContentsNumber);
