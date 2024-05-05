@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 import styled from "styled-components";
-import { SelectPrefs } from "../../components/elements/SelectPrefs";
+import { SelectPrefs } from "../../components/elements/SelectPrefCities";
 // import { SelectCities } from "../filter/SelectCities";
 import { CompareSelectTerm } from "./CompareSelectTerm";
 import { CompareSortListsViewGraph } from "./CompareSortListsViewGraph";

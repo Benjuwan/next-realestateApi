@@ -1,6 +1,8 @@
-"use client"
+// "use client"
+/* 親コンポーネント（SelectEls.tsx）でクライアントコンポーネントの宣言済みなので再度 "use client" は不要 */
 
-import { memo, useState, useEffect } from "react"
+import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
+import { memo, useState, useEffect, useContext, ChangeEvent } from "react"
 
 type SelectTermType = {
     SelectTermClassName: string;
@@ -9,6 +11,9 @@ type SelectTermType = {
 
 function SelectTerm({ props }: { props: SelectTermType }) {
     const { SelectTermClassName, explainSentence } = props;
+
+    const { setGetFetchYearValue, setGetFetchQuarterValue } = useContext(GetFetchEachCode);
+
     const startYear: number = 1999;
     const getPresentYear: number = new Date().getFullYear();
 
@@ -24,12 +29,12 @@ function SelectTerm({ props }: { props: SelectTermType }) {
     return (
         <div className={SelectTermClassName}>
             {explainSentence && <p>{explainSentence}</p>}
-            <select name="" id="yearsLists">
+            <select name="" id="yearsLists" onChange={(e: ChangeEvent<HTMLSelectElement>) => setGetFetchYearValue((_prevGetFetchYearValue) => e.target.value)}>
                 {isSelectYears.map((yearsEls, i) => (
                     <option key={i} value={yearsEls}>{yearsEls}</option>
                 ))}
             </select>
-            <select name="" id="quarterLists">
+            <select name="" id="quarterLists" onChange={(e: ChangeEvent<HTMLSelectElement>) => setGetFetchQuarterValue((_prevGetFetchQuarterValue) => e.target.value)}>
                 {selectQuarter.map((quarterEl, i) => (
                     <option key={i} value={quarterEl}>{quarterEl}</option>
                 ))}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CompareSortGraphActionFragment } from "./providers/compare/CompareSortGraphAction";
 import { CityNameFragment } from "./providers/filter/CityName";
 import { GetFetchDataContextFragment } from "./providers/filter/GetFetchData";
-import { GetFetchPrefCodeFragment } from "./providers/filter/GetFetchPrefCode";
+import { GetFetchEachCodeFragment } from "./providers/filter/GetFetchEachCode";
 import { Suspense } from "react";
 import Loading from "./loading";
 
@@ -21,13 +21,13 @@ export default function RootLayout({
       <body>
         <GetFetchDataContextFragment>
           <CityNameFragment>
-            <GetFetchPrefCodeFragment>
+            <GetFetchEachCodeFragment>
               <CompareSortGraphActionFragment>
                 <Suspense fallback={<Loading />}>
                   {children}
                 </Suspense>
               </CompareSortGraphActionFragment>
-            </GetFetchPrefCodeFragment>
+            </GetFetchEachCodeFragment>
           </CityNameFragment>
         </GetFetchDataContextFragment>
       </body>

@@ -1,13 +1,27 @@
-import selectElsStyles from "../../styles/selectEls.module.css";
-import { memo } from "react";
-import SelectPrefs from "./SelectPrefs";
-import SelectTerm from "./SelectTerm";
+"use client"
 
-function SelectEls() {
+import selectElsStyles from "../../styles/selectEls.module.css";
+import { SyntheticEvent, memo, useContext } from "react";
+import { estateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
+import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
+import { GetFetchDataContext } from "@/app/providers/filter/GetFetchData";
+import SelectPrefCities from "./SelectPrefCities";
+import SelectTerm from "./SelectTerm";
+import { get_PrefCityYearTerm_TargetValueData } from "@/app/server-action/getPrefCityYearTermTargetValueData";
+
+function SelectEls({ isActionable }: { isActionable?: boolean }) {
+    const { isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue } = useContext(GetFetchEachCode);
+
+    const { setGetFetchData } = useContext(GetFetchDataContext);
+
     return (
-        <form action="" className={selectElsStyles.SelectElsWrapper}>
+        <form action="" className={selectElsStyles.SelectElsWrapper} onSubmit={async (e: SyntheticEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            const resObjDataAry: estateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
+            setGetFetchData((_prevGetFetchData) => resObjDataAry);
+        }}>
             <div className={selectElsStyles.termEls}>
-                <SelectPrefs initialPrefCode="01" />
+                <SelectPrefCities />
             </div>
             <div className={selectElsStyles.termEls}>
                 <SelectTerm props={{
@@ -15,7 +29,8 @@ function SelectEls() {
                     explainSentence: '期間'
                 }} />
             </div>
-            <p className={selectElsStyles.termCaption}><small>※ 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月<a href="https://www.land.mlit.go.jp/webland/api.html" target="_blank">『国土交通省　土地総合情報システム』から取得</a></small></p>
+            <p className={selectElsStyles.termCaption}><small>※ 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月</small></p>
+            {isActionable && <button>run</button>}
         </form>
     );
 }

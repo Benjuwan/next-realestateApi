@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { estateInfoJsonData, estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 import { CompareSortGraphAction } from "../providers/compare/CompareSortGraphAction";
-import { GetFetchPrefCode } from "../providers/filter/GetFetchPrefCode";
+import { GetFetchEachCode } from "../providers/filter/GetFetchEachCode";
 
 export const useGetTradePrice = () => {
     /* 非nullアサーション演算子[!]：その直前のオブジェクトがnullまたはundefinedでないことをTypeScriptにアサート（主張）する。未定義（undefined）の場合はそれが加味された処理・結果になるが、実行時にnullまたはundefinedが発生するとアプリケーションはクラッシュする可能性がある */
@@ -9,7 +9,7 @@ export const useGetTradePrice = () => {
 
     /* 各種 Context */
     const { setSortGraphAction } = useContext(CompareSortGraphAction);
-    const { isGetFetchPrefCode } = useContext(GetFetchPrefCode);
+    const { isGetFetchPrefCode } = useContext(GetFetchEachCode);
 
     /* 取得した tradePrice データから平均価格を算出 */
     const _AverageCalc: (annualYear: number, resElAry: string[]) => (string | number)[] = (
