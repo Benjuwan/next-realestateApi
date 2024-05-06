@@ -1,11 +1,12 @@
-import { memo, useState } from "react";
-import styled from "styled-components";
-import { SelectPrefs } from "../../components/elements/SelectPrefCities";
-// import { SelectCities } from "../filter/SelectCities";
-import { CompareSelectTerm } from "./CompareSelectTerm";
-import { CompareSortListsViewGraph } from "./CompareSortListsViewGraph";
+"use client"
 
-export const CompareComponent = memo(() => {
+import styled from "styled-components";
+import { memo, useState } from "react";
+import SelectPrefs from "../../components/elements/SelectPrefCities";
+import CompareSelectTerm from "./CompareSelectTerm";
+import CompareSortListsViewGraph from "./CompareSortListsViewGraph";
+
+function CompareComponent() {
     /* chart コンポーネント表示判定用の State */
     const [isViewChart, setViewChart] = useState<boolean>(false);
 
@@ -14,8 +15,10 @@ export const CompareComponent = memo(() => {
             <div className="selectElsWrapper">
                 <div className="selectEls">
                     <SelectPrefs />
-                    {/* <SelectCities /> */}
-                    <CompareSelectTerm isViewChart={isViewChart} setViewChart={setViewChart} />
+                    <CompareSelectTerm props={{
+                        isViewChart: isViewChart,
+                        setViewChart: setViewChart
+                    }} />
                 </div>
                 <div className="explain">
                     <p>指定された<b>場所</b>と<b>計測期間</b>における<b>不動産取引の年間平均取引価格</b>（*1）を確認できます。（*1：1～4の四半期通年の平均取引価格）</p>
@@ -26,10 +29,15 @@ export const CompareComponent = memo(() => {
                 </ul>
             </div>
             <p id="prefCityName"></p>
-            <CompareSortListsViewGraph isViewChart={isViewChart} setViewChart={setViewChart} />
+            <CompareSortListsViewGraph props={{
+                isViewChart: isViewChart,
+                setViewChart: setViewChart
+            }} />
         </CompareComponentEl>
     );
-});
+}
+
+export default memo(CompareComponent);
 
 const CompareComponentEl = styled.div`
 /* padding: 2.5em; */
