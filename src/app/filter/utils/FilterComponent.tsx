@@ -1,12 +1,14 @@
-import { memo } from "react";
+"use client"
+
 import styled from "styled-components";
-import { SelectEls } from "../../components/elements/SelectEls";
-import { FetchDataContents } from "./FetchDataContents";
+import { memo } from "react";
+import SelectEls from "../../components/elements/SelectEls";
+import FetchDataContents from "./FetchDataContents";
 
 export const FilterComponent = memo(() => {
     return (
         <Contents>
-            <SelectEls pagerName="filter" />
+            <SelectEls isActionable />
             <FetchDataContents />
         </Contents>
     );

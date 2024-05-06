@@ -1,9 +1,9 @@
-import { memo, useState, ChangeEvent } from "react";
 import styled from "styled-components";
-import { useFilterMethod } from "../../hooks/filter/useFilterMethod";
-import { useSortMethod } from "../../hooks/filter/useSortMethod";
+import { memo, useState, ChangeEvent } from "react";
+import { useFilterMethod } from "../hooks/useFilterMethod";
+import { useSortMethod } from "../hooks/useSortMethod";
 
-export const FilterActionBtns = memo(() => {
+function FilterActionBtns() {
     const { ascClick, deskClick } = useSortMethod();
     const { FilterPlace, ResetFilter } = useFilterMethod();
 
@@ -38,7 +38,9 @@ export const FilterActionBtns = memo(() => {
             <button type="button" className="resetBtn" onClick={filterReset}>リセット</button>
         </Btns>
     );
-});
+}
+
+export default memo(FilterActionBtns);
 
 const Btns = styled.div`
 margin-bottom: 2em;

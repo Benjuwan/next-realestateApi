@@ -6,6 +6,7 @@ import { GetFetchDataContextFragment } from "./providers/filter/GetFetchData";
 import { GetFetchEachCodeFragment } from "./providers/filter/GetFetchEachCode";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Header from './components/layout/header/Header';
 
 export const metadata: Metadata = {
   title: "不動産取引データ取得機能",
@@ -24,6 +25,7 @@ export default function RootLayout({
           <CityNameFragment>
             <GetFetchEachCodeFragment>
               <CompareSortGraphActionFragment>
+                <Header />
                 <Suspense fallback={<Loading />}>
                   {children}
                 </Suspense>

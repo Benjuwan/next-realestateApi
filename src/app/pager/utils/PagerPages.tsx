@@ -36,8 +36,7 @@ function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
                 setPagerContentsFrag(isPagers, isOffSet);
             }
         }
-    }, [isPagers]);
-    /* 単体使用時は isGetFetchData, isPagers を依存配列に指定 */
+    }, [isPagers, pagerLimitMaxNum]);
 
     /* fee を3桁区切りに */
     const { ToLocalString } = useToLocalString();
