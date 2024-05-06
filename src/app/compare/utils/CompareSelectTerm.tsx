@@ -1,15 +1,15 @@
-import { memo, FC, useState, useEffect, ChangeEvent } from "react";
-import { AppStartBtn } from "./AppStartBtn";
+import { memo, useState, useEffect, ChangeEvent } from "react";
+import AppStartBtn from "./AppStartBtn";
 
-type CompareSelectTermType = {
+type compareSelectTermType = {
     isViewChart: boolean;
     setViewChart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const CompareSelectTerm: FC<CompareSelectTermType> = memo((props) => {
+function CompareSelectTerm({ props }: { props: compareSelectTermType }) {
     const { isViewChart, setViewChart } = props;
 
-    const startYear: number = 1999;
+    const startYear: number = 2010;
     const getPresentYear: number = new Date().getFullYear();
 
     const [isSelectYears, setSelectYears] = useState<string[]>(['']);
@@ -22,7 +22,7 @@ export const CompareSelectTerm: FC<CompareSelectTermType> = memo((props) => {
     /* CompareSelectTerm 固有機能 */
     /* 計測開始・終了期間のセット State */
     const [termLists_from, setTermLists_from] = useState<number>(startYear);
-    const [termLists_to, setTermLists_to] = useState<number>(getPresentYear);
+    const [termLists_to, setTermLists_to] = useState<number>(startYear);
 
     /* 計測開始・終了期間の State 更新を行う select イベント */
     const selectTermEvent: (
@@ -46,8 +46,11 @@ export const CompareSelectTerm: FC<CompareSelectTermType> = memo((props) => {
         const toValue: number = Number(termTo?.value);
 
         /* 計測期間が同じでなく終了期間の方が大きい（過去 < 未来となっている）場合は disabled 解除。そうでない場合は disabled 付与 */
-        if (fromValue !== toValue && fromValue < toValue) setAppStartBtn(false);
-        else setAppStartBtn(true);
+        if (fromValue !== toValue && fromValue < toValue) {
+            setAppStartBtn(false);
+        } else {
+            setAppStartBtn(true);
+        }
     }
 
     return (
@@ -70,13 +73,17 @@ export const CompareSelectTerm: FC<CompareSelectTermType> = memo((props) => {
                     ))}
                 </select>
                 <AppStartBtn
-                    isAppStartBtn={isAppStartBtn}
-                    termLists_from={termLists_from}
-                    termLists_to={termLists_to}
-                    isViewChart={isViewChart}
-                    setViewChart={setViewChart}
+                    props={{
+                        isAppStartBtn: isAppStartBtn,
+                        termLists_from: termLists_from,
+                        termLists_to: termLists_to,
+                        isViewChart: isViewChart,
+                        setViewChart: setViewChart
+                    }}
                 />
             </form>
         </>
     );
-});
+}
+
+export default memo(CompareSelectTerm);

@@ -1,5 +1,5 @@
-import { memo, FC, useState, useContext } from "react";
 import styled from "styled-components";
+import { memo, useState, useContext } from "react";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts'; // https://recharts.org/en-US
 import { CompareSortGraphAction } from "../../providers/compare/CompareSortGraphAction";
 
@@ -15,7 +15,7 @@ type chartDataType = {
     amt?: number
 }
 
-export const CompareSortListsViewGraph: FC<CompareListsSortLists_viewGraphType> = memo((props) => {
+function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_viewGraphType }) {
     const { isViewChart, setViewChart } = props;
 
     /* 各種 Context */
@@ -78,8 +78,9 @@ export const CompareSortListsViewGraph: FC<CompareListsSortLists_viewGraphType> 
             <ul className="AverageCalcLists"></ul>
         </SortListsViewGraphWrapper>
     );
-});
+}
 
+export default memo(CompareSortListsViewGraph);
 
 const SortListsViewGraphWrapper = styled.div`
 & .sortLists_viewGraphBtn {
