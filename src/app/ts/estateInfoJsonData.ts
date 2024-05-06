@@ -1,6 +1,9 @@
 export type estateInfoJsonData = {
     status: string;
     data: estateInfoJsonDataContents[];
+    message?: {
+        insufficient: string;
+    }
 }
 
 export type estateInfoJsonDataContents = {

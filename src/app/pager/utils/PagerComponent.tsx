@@ -5,13 +5,7 @@ import ContentsNumber from "./ContentsNumber";
 import Pagination from "./Pagination";
 import PagerPages from "./PagerPages";
 
-type PagerComponentProps = {
-    pagerLimitMaxNum: number;
-}
-
-function PagerComponent({ props }: { props: PagerComponentProps }) {
-    const { pagerLimitMaxNum } = props;
-
+function PagerComponent({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     const { isGetFetchData } = useContext(GetFetchDataContext);
 
     return (

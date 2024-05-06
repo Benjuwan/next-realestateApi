@@ -14,7 +14,7 @@ export const PagerBaseComponent = memo(() => {
     return (
         <PagerBaseElm>
             <SelectEls isActionable />
-            <PagerComponent props={{ pagerLimitMaxNum: pagerLimitMaxNum }} />
+            <PagerComponent pagerLimitMaxNum={pagerLimitMaxNum} />
         </PagerBaseElm>
     );
 });

@@ -1,16 +1,15 @@
-import { memo, useContext } from "react";
 import styled from "styled-components";
+import { memo, useContext } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { CityName } from "../../providers/filter/CityName";
-import { LoadingEl } from "../../utils/LoadingEl";
-import { FilterContentsCatClick } from "./FilterContentsCatClick";
-import { FilterActionBtns } from "./FilterActionBtns";
-import { AverageNumber } from "./AverageNumber";
-import { HiddenDetailsContent } from "../../components/HiddenDetailsContent";
+import FilterContentsCatClick from "./FilterContentsCatClick";
+import FilterActionBtns from "./FilterActionBtns";
+import AverageNumber from "./AverageNumber";
+import HiddenDetailsContent from "@/app/utils/HiddenDetailsContent";
 import { useToLocalString } from "../../hooks/useToLocalString";
 
-export const FetchDataContents = memo(() => {
-    const { isGetFetchData, isLoading } = useContext(GetFetchDataContext); // fetch データ
+function FetchDataContents() {
+    const { isGetFetchData } = useContext(GetFetchDataContext); // fetch データ
     const { isCityName } = useContext(CityName); // 都道府県・市区町村名
 
     /* fee を3桁区切りに */
@@ -25,29 +24,31 @@ export const FetchDataContents = memo(() => {
     }
 
     return (
-        <>{isLoading ? <LoadingEl /> :
-            <>
-                {isGetFetchData.length > 0 &&
-                    <>
-                        <FilterActionBtns />
-                        <h2 style={headingStyle}>{isCityName && <>「{isCityName}」の</>}平均取引価格「<AverageNumber />」</h2>
-                        <p>件数：{isGetFetchData.length}</p>
-                    </>
-                }
-                {isGetFetchData.map((el, i) => (
-                    <EachContents className="contents" key={i}>
-                        <FilterContentsCatClick aryEl={el} classNameStr="infoBtn" />
-                        <div className="place">
-                            <p className="DistrictName">{el.Municipality}{el.DistrictName}</p>
-                            <p>￥<span className="TradePrice">{ToLocalString(el.TradePrice)}</span></p>
-                        </div>
-                        <HiddenDetailsContent aryEl={el} />
-                    </EachContents>))}
-            </>
-        }
+        <>
+            {isGetFetchData.length > 0 &&
+                <>
+                    <FilterActionBtns />
+                    <h2 style={headingStyle}>{isCityName && <>「{isCityName}」の</>}平均取引価格「<AverageNumber />」</h2>
+                    <p>件数：{isGetFetchData.length}</p>
+                </>
+            }
+            {isGetFetchData.map((el, i) => (
+                <EachContents className="contents" key={i}>
+                    <FilterContentsCatClick props={{
+                        aryEl: el,
+                        classNameStr: "infoBtn"
+                    }} />
+                    <div className="place">
+                        <p className="DistrictName">{el.Municipality}{el.DistrictName}</p>
+                        <p>￥<span className="TradePrice">{ToLocalString(el.TradePrice)}</span></p>
+                    </div>
+                    <HiddenDetailsContent aryEl={el} />
+                </EachContents>))}
         </>
     );
-});
+}
+
+export default memo(FetchDataContents);
 
 const EachContents = styled.div`
 &.contents{

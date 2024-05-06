@@ -1,14 +1,15 @@
-import { memo, FC } from "react";
+import { memo } from "react";
 import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
-import { useFilterMethod } from "../../hooks/filter/useFilterMethod";
+import { useFilterMethod } from "../hooks/useFilterMethod";
 
 type filterAryProps = {
     aryEl: estateInfoJsonDataContents;
     classNameStr?: string;
 }
 
-export const FilterContentsCatClick: FC<filterAryProps> = memo((props) => {
+function FilterContentsCatClick({ props }: { props: filterAryProps }) {
     const { aryEl, classNameStr = 'simpleBtn' } = props;
+    
     const { FilterType } = useFilterMethod();
 
     return (
@@ -16,4 +17,6 @@ export const FilterContentsCatClick: FC<filterAryProps> = memo((props) => {
             FilterType(btnEl.currentTarget.textContent);
         }}>{aryEl.Type}</button>
     );
-});
+}
+
+export default memo(FilterContentsCatClick);

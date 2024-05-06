@@ -13,6 +13,14 @@ function SelectPrefCities() {
     const [cities, setCities] = useState<cityAry[]>([]);
 
     useEffect(() => {
+        /* 選択済み市区町村に応じた都道府県をデフォルト選択：selected={data.prefcode === isGetFetchPrefCode} を JSX に直接記述すると React がエラーを出すので手続き的処理で実装 */
+        const prefListsOptions: NodeListOf<HTMLOptionElement> = document.querySelectorAll('#prefLists option');
+        prefListsOptions.forEach(option => {
+            if (option.getAttribute('value') === isGetFetchPrefCode) {
+                option.setAttribute('selected', 'true');
+            }
+        });
+
         if (isGetFetchPrefCode) {
             const fetchCityCode = async () => {
                 const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(isGetFetchPrefCode);

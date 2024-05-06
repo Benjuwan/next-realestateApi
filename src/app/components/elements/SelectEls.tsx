@@ -12,12 +12,24 @@ import { get_PrefCityYearTerm_TargetValueData } from "@/app/server-action/getPre
 function SelectEls({ isActionable }: { isActionable?: boolean }) {
     const { isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue } = useContext(GetFetchEachCode);
 
-    const { setGetFetchData } = useContext(GetFetchDataContext);
+    const { isGetFetchData, setGetFetchData, setPagers, setCurrPager } = useContext(GetFetchDataContext);
+
+    /*（既にコンテンツが表示されている場合の）ページャー（現在の表示中ページ及びページ送り数）の初期化 */
+    const resetPager: () => void = () => {
+        setCurrPager(1);
+        setPagers(0);
+    }
 
     return (
         <form action="" className={selectElsStyles.SelectElsWrapper} onSubmit={async (e: SyntheticEvent<HTMLFormElement>) => {
             e.preventDefault();
             const resObjDataAry: estateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
+            if (typeof resObjDataAry === "undefined") {
+                alert('今回選択した項目・条件のデータは存在しません');
+                location.reload();
+                return;
+            }
+            if (isGetFetchData.length > 0) resetPager();
             setGetFetchData((_prevGetFetchData) => resObjDataAry);
         }}>
             <div className={selectElsStyles.termEls}>
