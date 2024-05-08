@@ -1,15 +1,15 @@
 import { memo } from "react";
-import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import { useFilterMethod } from "../hooks/useFilterMethod";
 
-type filterAryProps = {
-    aryEl: estateInfoJsonDataContents;
+type FilterAryProps = {
+    aryEl: EstateInfoJsonDataContents;
     classNameStr?: string;
 }
 
-function FilterContentsCatClick({ props }: { props: filterAryProps }) {
+function FilterContentsCatClick({ props }: { props: FilterAryProps }) {
     const { aryEl, classNameStr = 'simpleBtn' } = props;
-    
+
     const { FilterType } = useFilterMethod();
 
     return (

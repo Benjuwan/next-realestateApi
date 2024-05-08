@@ -1,6 +1,6 @@
-import { prefCodeType } from "../../ts/prefcode";
+import { PrefCodeType } from "../../ts/prefcode";
 
-export const prefcodeData: prefCodeType[] = [
+export const prefcodeData: PrefCodeType[] = [
     {
         "prefcode": "01",
         "prefJaName": "北海道",

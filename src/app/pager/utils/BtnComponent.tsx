@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { memo } from "react";
 
-type btnType = {
+type BtnType = {
     btnTxt: string;
     classNameTxt: string;
     ClickEvent: () => void;
     disabledBool?: boolean;
 }
 
-function BtnComponent({ props }: { props: btnType }) {
+function BtnComponent({ props }: { props: BtnType }) {
     const { btnTxt, classNameTxt = 'default', ClickEvent, disabledBool } = props;
 
     return (

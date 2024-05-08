@@ -1,20 +1,21 @@
 import { useContext } from "react";
-import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
 
 export const useFilterMethod = () => {
     const { isGetFetchData, setGetFetchData } = useContext(GetFetchDataContext);
+    const { setGetFetchPrefCode } = useContext(GetFetchEachCode);
 
     /* フィルター：Type（用途）*/
     const FilterType: (filterWord: string | null) => void = (filterWord: string | null) => {
-        const filterTypeAry: estateInfoJsonDataContents[] = [...isGetFetchData].filter(els => filterWord === els.Type);
+        const filterTypeAry: EstateInfoJsonDataContents[] = [...isGetFetchData].filter(els => filterWord === els.Type);
         setGetFetchData((_prevFetchAry) => filterTypeAry);
     }
 
     /* フィルター：DistrictName（地区）*/
     const FilterPlace: (filterWord: string | null) => void = (filterWord: string | null) => {
-        const filterPlaceAry: estateInfoJsonDataContents[] = [...isGetFetchData].filter(els => els.DistrictName.match(`${filterWord}`));
+        const filterPlaceAry: EstateInfoJsonDataContents[] = [...isGetFetchData].filter(els => els.DistrictName.match(`${filterWord}`));
         if (filterPlaceAry.length === 0) {
             alert(`地区名「${filterWord}」は、\n検索条件のデータ内に存在しません。`);
             return; // リターンで処理終了
@@ -38,9 +39,8 @@ export const useFilterMethod = () => {
         }
 
     /* データリセット */
-    const { setGetFetchPrefCode } = useContext(GetFetchEachCode);
     const ResetFilter: () => void = () => {
-        setGetFetchData((_prevFetchAry) => []); // フィルターのかかったデータを一旦削除（配列を空に）
+        setGetFetchData([]); // フィルターのかかったデータを一旦削除（配列を空に）
 
         /* 都道府県 select を初期値に戻す */
         const prefListsOptions: NodeListOf<HTMLOptionElement> | null = document.querySelectorAll('#prefLists option');

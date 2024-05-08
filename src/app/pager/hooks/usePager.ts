@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GetFetchDataContext } from "../providers/filter/GetFetchData";
+import { GetFetchDataContext } from '@/app/providers/filter/GetFetchData';
 
 export const usePager = () => {
     /* 各種 Context：ページャーのオフセットは isOffSet State で指定 */

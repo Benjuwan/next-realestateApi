@@ -2,7 +2,7 @@
 
 import selectElsStyles from "../../styles/selectEls.module.css";
 import { SyntheticEvent, memo, useContext } from "react";
-import { estateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
 import { GetFetchDataContext } from "@/app/providers/filter/GetFetchData";
 import SelectPrefCities from "./SelectPrefCities";
@@ -23,7 +23,7 @@ function SelectEls({ isActionable }: { isActionable?: boolean }) {
     return (
         <form action="" className={selectElsStyles.SelectElsWrapper} onSubmit={async (e: SyntheticEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const resObjDataAry: estateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
+            const resObjDataAry: EstateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
             if (typeof resObjDataAry === "undefined") {
                 alert('今回選択した項目・条件のデータは存在しません');
                 location.reload();
@@ -32,15 +32,11 @@ function SelectEls({ isActionable }: { isActionable?: boolean }) {
             if (isGetFetchData.length > 0) resetPager();
             setGetFetchData((_prevGetFetchData) => resObjDataAry);
         }}>
-            <div className={selectElsStyles.termEls}>
-                <SelectPrefCities />
-            </div>
-            <div className={selectElsStyles.termEls}>
-                <SelectTerm props={{
-                    SelectTermClassName: selectElsStyles.YearsQuarterLists_From,
-                    explainSentence: '期間'
-                }} />
-            </div>
+            <SelectPrefCities />
+            <SelectTerm props={{
+                SelectTermClassName: selectElsStyles.YearsQuarterLists_From,
+                explainSentence: '期間'
+            }} />
             <p className={selectElsStyles.termCaption}><small>※ 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月</small></p>
             {isActionable && <button>run</button>}
         </form>

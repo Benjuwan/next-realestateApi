@@ -1,5 +1,6 @@
 "use client"
 
+import baseStyles from "../../../styles/page.module.css";
 import { memo, useContext } from "react";
 import Link from "next/link";
 import { GetFetchDataContext } from "@/app/providers/filter/GetFetchData";
@@ -9,7 +10,9 @@ function Header() {
 
     return (
         <header>
-            <Link href={'/'} onClick={() => setGetFetchData([])}>Topへ</Link>
+            <div className={baseStyles.breadcrumbs}>
+                <Link href={'/'} onClick={() => setGetFetchData([])}>Topへ</Link>
+            </div>
         </header>
     );
 }

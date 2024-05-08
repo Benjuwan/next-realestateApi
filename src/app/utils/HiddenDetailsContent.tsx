@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 import ContentItmes from "../components/layout/ContentItmes";
 import { useViewDetails } from "../hooks/useViewDetails";
 
-function HiddenDetailsContent({ aryEl }: { aryEl: estateInfoJsonDataContents }) {
+function HiddenDetailsContent({ aryEl }: { aryEl: EstateInfoJsonDataContents }) {
     /* 詳細情報の表示機能（モーダル）*/
     const { ViewDetails } = useViewDetails();
 

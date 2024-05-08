@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import { useToLocalString } from "../../hooks/useToLocalString";
 
-function ContentsItems({ aryEl }: { aryEl: estateInfoJsonDataContents }) {
+function ContentsItems({ aryEl }: { aryEl: EstateInfoJsonDataContents }) {
     /* fee を3桁区切りに */
     const { ToLocalString } = useToLocalString();
 
@@ -22,8 +22,8 @@ function ContentsItems({ aryEl }: { aryEl: estateInfoJsonDataContents }) {
                         {aryEl.DistrictName && <span>{aryEl.DistrictName}</span>}
                     </p>
                 }
-                {aryEl.BuildingYear && <p className="buildingYear">{aryEl.BuildingYear}</p>}
-                {aryEl.FloorPlan && <p className="floorPlan">{aryEl.FloorPlan}</p>}
+                {aryEl.BuildingYear && <p className="buildingYear">建築年：{aryEl.BuildingYear}</p>}
+                {aryEl.FloorPlan && <p className="floorPlan">間取り：{aryEl.FloorPlan}</p>}
                 {aryEl.Area && <p className="area">面積（平方メートル）：{aryEl.Area}</p>}
                 {aryEl.Structure && <p className="structure">{aryEl.Structure}</p>}
                 {aryEl.Renovation && <p className="renovation">{aryEl.Renovation}</p>}

@@ -1,13 +1,12 @@
 /* 祖先コンポーネント（CompareComponent.tsx）でクライアントコンポーネントの宣言済みなので "use client" は不要 */
 
-import { memo, useContext, useState } from "react";
-import { estateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
+import { memo, useContext } from "react";
 import { CompareSortGraphAction } from "@/app/providers/compare/CompareSortGraphAction";
-import { useCalcAverageFee } from "@/app/hooks/useCalcAverageFee";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
+import { useCalcAverageFee } from "@/app/hooks/useCalcAverageFee";
 import { get_Pref_CompareYearData } from "@/app/server-action/getPrefCompareYearData";
 
-type appStartBtnType = {
+type AppStartBtnType = {
     isAppStartBtn: boolean;
     termLists_from: number;
     termLists_to: number;
@@ -15,25 +14,23 @@ type appStartBtnType = {
     setViewChart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AppStartBtn({ props }: { props: appStartBtnType }) {
+function AppStartBtn({ props }: { props: AppStartBtnType }) {
     const { isAppStartBtn, termLists_from, termLists_to, isViewChart, setViewChart } = props;
 
     const { isGetFetchPrefCode } = useContext(GetFetchEachCode);
-
-    const [getFetchData, setGetFetchData] = useState<estateInfoJsonDataContents[]>([]);
 
     const { setSortGraphAction } = useContext(CompareSortGraphAction);
 
     const { calcAverageFee } = useCalcAverageFee();
 
     /* サーバーアクション */
-    const _async_serverAction_getPrefCompareYearData: () => Promise<void> = async () => {
-        let start: number = termLists_from;
-        while (start <= termLists_to) {
-            console.log(start, getFetchData); // 初回は何故か空
-            const resObjDataAry: estateInfoJsonDataContents[] = await get_Pref_CompareYearData(isGetFetchPrefCode, termLists_from.toString());
-            setGetFetchData((_prevGetFetchData) => [...getFetchData, ...resObjDataAry]);
-            start++;
+    const async_serverAction_getPrefCompareYearData: () => Promise<void> = async () => {
+        let yearCountUp_untill_termLists_to: number = termLists_from;
+        while (yearCountUp_untill_termLists_to <= termLists_to) {
+            const tradePrice: string[] = await get_Pref_CompareYearData(isGetFetchPrefCode, yearCountUp_untill_termLists_to.toString());
+            // console.log(yearCountUp_untill_termLists_to, tradePrice);
+            _viewGetFetchData(tradePrice, yearCountUp_untill_termLists_to); // フェッチしたデータをグラフ表示
+            yearCountUp_untill_termLists_to++;
         }
     }
 
@@ -52,24 +49,27 @@ function AppStartBtn({ props }: { props: appStartBtnType }) {
     }
 
     /* フェッチしたデータをグラフ表示 */
-    const viewGetFetchData: () => void = () => {
-        if (getFetchData.length <= 0) {
+    const _viewGetFetchData: (tradePrice: string[], yearCountUp_untill_termLists_to: number) => void = (
+        tradePrice: string[],
+        yearCountUp_untill_termLists_to: number
+    ) => {
+        if (tradePrice.length <= 0) {
             console.error('getFetchData not exist.');
             return;
         }
 
         setSortGraphAction(true); // ソート＆グラフ表示ボタンの disabled を設定
 
-        const resElAry: string[] = getFetchData.map((data, i) => {
-            if (i === getFetchData.length - 1) {
-                return data.TradePrice, '.'; // 年間データの処理完了シグナルとして
+        const resElAry: string[] = tradePrice.map((priceData, i) => {
+            if (i === tradePrice.length - 1) {
+                return `${priceData}.`; // 年間データの処理完了シグナルとして
             } else {
-                return data.TradePrice;
+                return priceData;
             }
         });
 
         /* 平均価格を算出 */
-        const AverageCalcAry: (string | number)[] = calcAverageFee(termLists_from, resElAry);
+        const AverageCalcAry: (string | number)[] = calcAverageFee(yearCountUp_untill_termLists_to, resElAry);
 
         /**
          *【各年の平均価格をリアル DOM へ反映】
@@ -118,9 +118,8 @@ function AppStartBtn({ props }: { props: appStartBtnType }) {
     }
 
     return (
-        <button type="button" className="appStartBtn" disabled={isAppStartBtn} onClick={() => {
-            _async_serverAction_getPrefCompareYearData();
-            viewGetFetchData();
+        <button type="button" className="appStartBtn" disabled={isAppStartBtn} onClick={async () => {
+            async_serverAction_getPrefCompareYearData();
             appStart();
         }}>計測スタート</button>
     );

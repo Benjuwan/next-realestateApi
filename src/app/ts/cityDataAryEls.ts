@@ -1,9 +1,9 @@
-export type fetchCityData = {
+export type FetchCityData = {
     status: string;
-    data: cityAry[];
+    data: CityAry[];
 }
 
-export type cityAry = {
+export type CityAry = {
     id: string;
     name: string;
 }
