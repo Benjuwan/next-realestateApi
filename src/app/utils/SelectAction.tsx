@@ -7,6 +7,7 @@ function SelectAction() {
     const router = useRouter();
 
     return (
+        /* 選択した option の値（の文字列）を遷移先ページパスに指定 */
         <select name="" id="actionLists" onChange={(e: ChangeEvent<HTMLSelectElement>) => router.push(`/${e.target.value}`)}>
             <option defaultValue={undefined}>以下から選択してください</option>
             <option value="pager">pager（ページ送り）</option>
