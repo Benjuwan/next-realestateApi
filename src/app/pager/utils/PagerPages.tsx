@@ -36,6 +36,7 @@ function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
                 setPagerContentsFrag(isPagers, isOffSet);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPagers, pagerLimitMaxNum]);
 
     /* fee を3桁区切りに */

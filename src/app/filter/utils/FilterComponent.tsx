@@ -5,14 +5,16 @@ import { memo } from "react";
 import SelectEls from "../../components/elements/SelectEls";
 import FetchDataContents from "./FetchDataContents";
 
-export const FilterComponent = memo(() => {
+function FilterComponent() {
     return (
         <Contents>
             <SelectEls isActionable />
             <FetchDataContents />
         </Contents>
     );
-});
+}
+
+export default memo(FilterComponent);
 
 const Contents = styled.div`
 width: clamp(320px, 100%, 960px);

@@ -6,10 +6,13 @@ import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import SelectEls from "../../components/elements/SelectEls";
 import PagerComponent from "./PagerComponent";
 
-export const PagerBaseComponent = memo(() => {
+function PagerBaseComponent() {
     const { isGetFetchData } = useContext(GetFetchDataContext);
     const [pagerLimitMaxNum, setPagerLimitMaxNum] = useState<number>(0);
-    useEffect(() => setPagerLimitMaxNum((_prevPagerLimitMaxNum) => isGetFetchData.length), [isGetFetchData]);
+    useEffect(() => {
+        setPagerLimitMaxNum((_prevPagerLimitMaxNum) => isGetFetchData.length);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGetFetchData]);
 
     return (
         <PagerBaseElm>
@@ -17,7 +20,9 @@ export const PagerBaseComponent = memo(() => {
             <PagerComponent pagerLimitMaxNum={pagerLimitMaxNum} />
         </PagerBaseElm>
     );
-});
+}
+
+export default memo(PagerBaseComponent);
 
 const PagerBaseElm = styled.div`
 width: clamp(320px, 100%, 960px);
