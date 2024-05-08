@@ -25,21 +25,22 @@
         margin-bottom: 1.5em;
         gap: 2%;
     }
+}
 
-    & .YearsQuarterLists {
-        width: 49%;
-        display: flex;
-        flex-flow: row wrap;
-        gap: 2%;
+.termEls .YearsQuarterLists {
+    width: 49%;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2%;
+}
 
-        & .explainSentence {
-            font-size: 14px;
-            line-height: 1.4;
-            border-left: 8px solid;
-            padding-left: .5em;
-            margin-bottom: .5em;
-        }
-    }
+.termEls .explainSentence {
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.4;
+    border-left: 4px solid #dadada;
+    padding-left: .5em;
+    margin-bottom: .5em;
 }
 
 .termEls .YearsQuarterLists select {

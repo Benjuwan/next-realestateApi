@@ -1,16 +1,17 @@
 // "use client"
 /* 親コンポーネント（SelectEls.tsx）でクライアントコンポーネントの宣言済みなので再度 "use client" は不要 */
 
+import selectElsStyles from "../../styles/selectEls.module.css";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
 import React, { useContext, useEffect, useState, ChangeEvent, memo } from 'react';
-import { cityAry } from "@/app/ts/cityDataAryEls";
+import { CityAry } from "@/app/ts/cityDataAryEls";
 import { prefcodeData } from "@/app/components/layout/prefcodeData";
 import { get_SelectElValue_CityCode } from "../../server-action/getSelectElValueCityCode";
 
 function SelectPrefCities() {
     const { isGetFetchPrefCode, setGetFetchPrefCode, setGetFetchCityCode } = useContext(GetFetchEachCode);
 
-    const [cities, setCities] = useState<cityAry[]>([]);
+    const [cities, setCities] = useState<CityAry[]>([]);
 
     useEffect(() => {
         /* 選択済み市区町村に応じた都道府県をデフォルト選択：selected={data.prefcode === isGetFetchPrefCode} を JSX に直接記述すると React がエラーを出すので手続き的処理で実装 */
@@ -23,7 +24,7 @@ function SelectPrefCities() {
 
         if (isGetFetchPrefCode) {
             const fetchCityCode = async () => {
-                const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(isGetFetchPrefCode);
+                const resObjDataAry: CityAry[] = await get_SelectElValue_CityCode(isGetFetchPrefCode);
                 setCities((_prevCities) => resObjDataAry);
             }
             fetchCityCode();
@@ -31,11 +32,11 @@ function SelectPrefCities() {
     }, [isGetFetchPrefCode]);
 
     return (
-        <>
+        <div className={selectElsStyles.termEls}>
             <div id="prefListsWrapper">
                 <select name="" id="prefLists" onChange={async (e: ChangeEvent<HTMLSelectElement>) => {
                     const newPrefCode: string = (e.target as HTMLSelectElement).value;
-                    const resObjDataAry: cityAry[] = await get_SelectElValue_CityCode(newPrefCode);
+                    const resObjDataAry: CityAry[] = await get_SelectElValue_CityCode(newPrefCode);
                     setGetFetchPrefCode((_prevGetFetchPrefCode) => newPrefCode);
                     setCities((_prevCities) => resObjDataAry);
                 }}>
@@ -51,7 +52,7 @@ function SelectPrefCities() {
                     ))}
                 </select>
             </div>
-        </>
+        </div>
     );
 }
 

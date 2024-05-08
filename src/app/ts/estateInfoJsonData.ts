@@ -1,12 +1,12 @@
-export type estateInfoJsonData = {
+export type EstateInfoJsonData = {
     status: string;
-    data: estateInfoJsonDataContents[];
+    data: EstateInfoJsonDataContents[];
     message?: {
         insufficient: string;
     }
 }
 
-export type estateInfoJsonDataContents = {
+export type EstateInfoJsonDataContents = {
     Area: string;
     BuildingYear: string
     CityPlanning: string;

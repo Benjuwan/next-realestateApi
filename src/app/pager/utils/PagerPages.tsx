@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useContext, useState, useEffect, memo } from "react";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
-import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 import HiddenDetailsContent from "@/app/utils/HiddenDetailsContent";
 import BtnComponent from "./BtnComponent";
-import { usePager } from "../../hooks/usePager";
 import { useToLocalString } from "../../hooks/useToLocalString";
+import { usePager } from "../hooks/usePager";
 
 function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     /* 各種Context */
@@ -15,13 +15,13 @@ function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     const { prevPagerPages, nextPagerPages } = usePager();
 
     /* ページャー機能：splice メソッドで処理 */
-    const [isPagerContents, setPagerContents] = useState<estateInfoJsonDataContents[]>([]);
+    const [isPagerContents, setPagerContents] = useState<EstateInfoJsonDataContents[]>([]);
     const setPagerContentsFrag: (fragStart: number, fragFinish: number) => void = (
         fragStart: number, // 始点（fragStart）：ページャー数
         fragFinish: number // 終点（fragFinish）：オフセット数
     ) => {
-        const shallowCopy: estateInfoJsonDataContents[] = [...isGetFetchData];
-        const splicedContents: estateInfoJsonDataContents[] = shallowCopy.splice(fragStart, fragFinish);
+        const shallowCopy: EstateInfoJsonDataContents[] = [...isGetFetchData];
+        const splicedContents: EstateInfoJsonDataContents[] = shallowCopy.splice(fragStart, fragFinish);
         setPagerContents((_prevPagerContents) => splicedContents);
     }
 

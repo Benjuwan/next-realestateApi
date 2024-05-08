@@ -2,9 +2,9 @@
 
 import styled from "styled-components";
 import { memo, useState } from "react";
-import SelectPrefs from "../../components/elements/SelectPrefCities";
 import CompareSelectTerm from "./CompareSelectTerm";
 import CompareSortListsViewGraph from "./CompareSortListsViewGraph";
+import SelectPrefCities from "@/app/components/elements/SelectPrefCities";
 
 function CompareComponent() {
     /* chart コンポーネント表示判定用の State */
@@ -14,7 +14,7 @@ function CompareComponent() {
         <CompareComponentEl>
             <div className="selectElsWrapper">
                 <div className="selectEls">
-                    <SelectPrefs />
+                    <SelectPrefCities />
                     <CompareSelectTerm props={{
                         isViewChart: isViewChart,
                         setViewChart: setViewChart

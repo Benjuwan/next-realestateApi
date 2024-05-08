@@ -1,8 +1,8 @@
 "use server";
 
-import { estateInfoJsonData, estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
+import { EstateInfoJsonData } from "../ts/estateInfoJsonData";
 
-export async function get_Pref_CompareYearData(prefCode: string, year: string): Promise<estateInfoJsonDataContents[]> {
+export async function get_Pref_CompareYearData(prefCode: string, year: string): Promise<string[]> {
     /* 非nullアサーション演算子[!]
      * その直前のオブジェクトがnullまたはundefinedでないことをTypeScriptにアサート（主張）する。未定義（undefined）の場合はそれが加味された処理・結果になるが、実行時にnullまたはundefinedが発生するとアプリケーションはクラッシュする可能性がある 
     */
@@ -14,8 +14,12 @@ export async function get_Pref_CompareYearData(prefCode: string, year: string): 
         },
     });
 
-    const resObj: estateInfoJsonData = await response.json();
+    const resObj: EstateInfoJsonData = await response.json();
     // console.log(resObj);
 
-    return resObj.data;
+    /* 不動産取引価格のみ抽出 */
+    const tradePrice: string[] = resObj.data.map(resElm => resElm.TradePrice);
+    // console.log(tradePrice);
+
+    return tradePrice;
 }

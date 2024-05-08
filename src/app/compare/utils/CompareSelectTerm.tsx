@@ -1,12 +1,12 @@
 import { memo, useState, useEffect, ChangeEvent } from "react";
 import AppStartBtn from "./AppStartBtn";
 
-type compareSelectTermType = {
+type CompareSelectTermType = {
     isViewChart: boolean;
     setViewChart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CompareSelectTerm({ props }: { props: compareSelectTermType }) {
+function CompareSelectTerm({ props }: { props: CompareSelectTermType }) {
     const { isViewChart, setViewChart } = props;
 
     const startYear: number = 2010;

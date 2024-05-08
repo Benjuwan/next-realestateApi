@@ -1,8 +1,8 @@
 "use server";
 
-import { estateInfoJsonData, estateInfoJsonDataContents } from "../ts/estateInfoJsonData";
+import { EstateInfoJsonData, EstateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 
-export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, year: string, term: string): Promise<estateInfoJsonDataContents[]> {
+export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, year: string, term: string): Promise<EstateInfoJsonDataContents[]> {
     /* 非nullアサーション演算子[!]
      * その直前のオブジェクトがnullまたはundefinedでないことをTypeScriptにアサート（主張）する。未定義（undefined）の場合はそれが加味された処理・結果になるが、実行時にnullまたはundefinedが発生するとアプリケーションはクラッシュする可能性がある 
     */
@@ -15,7 +15,7 @@ export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, yea
         },
     });
 
-    const resObj: estateInfoJsonData = await response.json();
+    const resObj: EstateInfoJsonData = await response.json();
     // console.log(resObj);
 
     return resObj.data;

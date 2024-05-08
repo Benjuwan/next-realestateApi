@@ -1,11 +1,11 @@
 "use client"
 
 import { createContext, ReactNode, useState, FC } from "react";
-import { estateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
+import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
 
 type Default = {
-    isGetFetchData: estateInfoJsonDataContents[];
-    setGetFetchData: React.Dispatch<React.SetStateAction<estateInfoJsonDataContents[]>>;
+    isGetFetchData: EstateInfoJsonDataContents[];
+    setGetFetchData: React.Dispatch<React.SetStateAction<EstateInfoJsonDataContents[]>>;
     isPagers: number;
     setPagers: React.Dispatch<React.SetStateAction<number>>;
     isOffSet: number;
@@ -25,7 +25,7 @@ export const GetFetchDataContextFragment: FC<fragmentType> = (props) => {
     */
 
     /* データフェッチしたコンテンツデータの格納用配列 State */
-    const [isGetFetchData, setGetFetchData] = useState<estateInfoJsonDataContents[]>([]);
+    const [isGetFetchData, setGetFetchData] = useState<EstateInfoJsonDataContents[]>([]);
 
     /* ページャー数の管理用 State */
     const [isPagers, setPagers] = useState<number>(0); // 再レンダリングの度に引数に指定した数値が加算される
