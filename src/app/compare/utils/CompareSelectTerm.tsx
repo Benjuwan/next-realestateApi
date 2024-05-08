@@ -17,7 +17,10 @@ function CompareSelectTerm({ props }: { props: CompareSelectTermType }) {
     for (let i = 0; i <= (getPresentYear - startYear); i++) {
         selectYearsAry.push(`${startYear + i}`);
     }
-    useEffect(() => setSelectYears((_prevSelectYearsAry) => selectYearsAry), []);
+    useEffect(() => {
+        setSelectYears((_prevSelectYearsAry) => selectYearsAry);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     /* CompareSelectTerm 固有機能 */
     /* 計測開始・終了期間のセット State */

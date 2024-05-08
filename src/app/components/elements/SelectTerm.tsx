@@ -23,7 +23,10 @@ function SelectTerm({ props }: { props: SelectTermType }) {
     for (let i = 0; i <= (getPresentYear - startYear); i++) {
         selectYearsAry.push(`${startYear + i}`);
     }
-    useEffect(() => setSelectYears((_prevSelectYearsAry) => selectYearsAry), []);
+    useEffect(() => {
+        setSelectYears((_prevSelectYearsAry) => selectYearsAry);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const selectQuarter: number[] = [1, 2, 3, 4]; // 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月
 

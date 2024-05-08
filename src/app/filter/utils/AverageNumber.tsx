@@ -7,6 +7,7 @@ function AverageNumber() {
     useEffect(() => {
         const averageCalcResult: string = averageCalc();
         setAveragePrice((_prevTxt) => averageCalcResult);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGetFetchData]);
 
     const [isAveragePrice, setAveragePrice] = useState<string>('');

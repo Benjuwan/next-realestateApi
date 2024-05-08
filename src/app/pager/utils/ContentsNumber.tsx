@@ -13,6 +13,7 @@ function ContentsNumber({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
         if (isPagers > pagerLimitMaxNum - isOffSet) {
             setCtrlPagerNum((_prevCtrlPagerNum) => pagerLimitMaxNum);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPagers]);
 
     return (
