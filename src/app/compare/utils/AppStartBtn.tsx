@@ -17,7 +17,7 @@ type AppStartBtnType = {
 function AppStartBtn({ props }: { props: AppStartBtnType }) {
     const { isAppStartBtn, termLists_from, termLists_to, isViewChart, setViewChart } = props;
 
-    const { isGetFetchPrefCode } = useContext(GetFetchEachCode);
+    const { isGetFetchPrefCode, isGetFetchCityCode } = useContext(GetFetchEachCode);
 
     const { setSortGraphAction } = useContext(CompareSortGraphAction);
 
@@ -27,9 +27,14 @@ function AppStartBtn({ props }: { props: AppStartBtnType }) {
     const async_serverAction_getPrefCompareYearData: () => Promise<void> = async () => {
         let yearCountUp_untill_termLists_to: number = termLists_from;
         while (yearCountUp_untill_termLists_to <= termLists_to) {
-            const tradePrice: string[] = await get_Pref_CompareYearData(isGetFetchPrefCode, yearCountUp_untill_termLists_to.toString());
-            // console.log(yearCountUp_untill_termLists_to, tradePrice);
-            _viewGetFetchData(tradePrice, yearCountUp_untill_termLists_to); // フェッチしたデータをグラフ表示
+            const tradePrice: string[] | undefined = await get_Pref_CompareYearData(yearCountUp_untill_termLists_to.toString(), isGetFetchPrefCode, isGetFetchCityCode);
+            if (typeof tradePrice !== "undefined") {
+                _viewGetFetchData(tradePrice, yearCountUp_untill_termLists_to); // フェッチしたデータをグラフ表示
+            } else {
+                alert('今回選択した項目・条件のデータは存在しません');
+                location.reload();
+                break;
+            }
             yearCountUp_untill_termLists_to++;
         }
     }

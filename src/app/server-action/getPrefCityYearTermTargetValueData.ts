@@ -2,7 +2,7 @@
 
 import { EstateInfoJsonData, EstateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 
-export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, year: string, term: string): Promise<EstateInfoJsonDataContents[]> {
+export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, year: string, term: string): Promise<EstateInfoJsonDataContents[] | undefined> {
     /* 非nullアサーション演算子[!]
      * その直前のオブジェクトがnullまたはundefinedでないことをTypeScriptにアサート（主張）する。未定義（undefined）の場合はそれが加味された処理・結果になるが、実行時にnullまたはundefinedが発生するとアプリケーションはクラッシュする可能性がある 
     */
@@ -18,5 +18,17 @@ export async function get_PrefCityYearTerm_TargetValueData(cityCode: string, yea
     const resObj: EstateInfoJsonData = await response.json();
     // console.log(resObj);
 
-    return resObj.data;
+    try {
+        if (resObj.message) {
+            if (resObj.message.insufficient) {
+                throw new Error(`fetch failed or no Results：${resObj.message.insufficient}`);
+            } else {
+                throw new Error(`fetch failed or no Results：${resObj.message}`);
+            }
+        }
+
+        return resObj.data;
+    } catch (error) {
+        console.error('error occurred - get_PrefCityYearTerm_TargetValueData.ts', error);
+    }
 }

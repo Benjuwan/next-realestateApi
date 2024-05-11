@@ -23,7 +23,7 @@ function SelectEls({ isActionable }: { isActionable?: boolean }) {
     return (
         <form action="" className={selectElsStyles.SelectElsWrapper} onSubmit={async (e: SyntheticEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const resObjDataAry: EstateInfoJsonDataContents[] = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
+            const resObjDataAry: EstateInfoJsonDataContents[] | undefined = await get_PrefCityYearTerm_TargetValueData(isGetFetchCityCode, isGetFetchYearValue, isGetFetchQuarterValue);
             if (typeof resObjDataAry === "undefined") {
                 alert('今回選択した項目・条件のデータは存在しません');
                 location.reload();
