@@ -38,7 +38,7 @@ function SelectEls({ isActionable }: { isActionable?: boolean }) {
                 explainSentence: '期間'
             }} />
             <p className={selectElsStyles.termCaption}><small>※ 1:1月～3月、2:4月～6月、3:7月～10月、4:11月～12月</small></p>
-            {isActionable && <button>run</button>}
+            {isActionable && <button type="submit">run</button>}
         </form>
     );
 }

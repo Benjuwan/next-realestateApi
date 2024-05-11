@@ -32,6 +32,7 @@ function SelectPrefCities() {
             }
             fetchCityCode();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGetFetchPrefCode]);
 
     return (
