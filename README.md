@@ -38,3 +38,5 @@
 
 ## 参考情報
 - [サーバーアクション](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- [【Next】環境変数のプレフィックス、NEXT_PUBLICの使い分け](https://zenn.dev/kibe/articles/7c09742400aa66)
+  - 要約：`NEXT_PUBLIC_`プレフィックスを付けた環境変数は**サーバーサイドとクライアントサイドの両方でアクセス可能**。これにより、フロントエンドのコードで直接参照することができます。そのため、秘密情報やセキュリティに関わる値は`NEXT_PUBLIC_`プレフィックスなしで保管するべき。
