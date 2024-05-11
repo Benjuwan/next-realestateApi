@@ -24,8 +24,11 @@ function SelectPrefCities() {
 
         if (isGetFetchPrefCode) {
             const fetchCityCode = async () => {
-                const resObjDataAry: CityAry[] = await get_SelectElValue_CityCode(isGetFetchPrefCode);
-                setCities((_prevCities) => resObjDataAry);
+                const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(isGetFetchPrefCode);
+                if (typeof resObjDataAry !== "undefined") {
+                    setGetFetchCityCode((_prevGetFetchCityCode) => resObjDataAry[0].id);
+                    setCities((_prevCities) => resObjDataAry);
+                }
             }
             fetchCityCode();
         }
@@ -35,10 +38,11 @@ function SelectPrefCities() {
         <div className={selectElsStyles.termEls}>
             <div id="prefListsWrapper">
                 <select name="" id="prefLists" onChange={async (e: ChangeEvent<HTMLSelectElement>) => {
-                    const newPrefCode: string = (e.target as HTMLSelectElement).value;
-                    const resObjDataAry: CityAry[] = await get_SelectElValue_CityCode(newPrefCode);
-                    setGetFetchPrefCode((_prevGetFetchPrefCode) => newPrefCode);
-                    setCities((_prevCities) => resObjDataAry);
+                    const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(e.target.value);
+                    setGetFetchPrefCode((_prevGetFetchPrefCode) => e.target.value);
+                    if (typeof resObjDataAry !== "undefined") {
+                        setCities((_prevCities) => resObjDataAry);
+                    }
                 }}>
                     {prefcodeData.map((data) => (
                         <option value={data.prefcode} key={data.prefcode}>{data.prefJaName}</option>
@@ -46,7 +50,9 @@ function SelectPrefCities() {
                 </select>
             </div>
             <div id="citiesListsWrapper">
-                <select name="" id="citiesLists" onChange={(e: ChangeEvent<HTMLSelectElement>) => setGetFetchCityCode((_prevGetFetchCityCode) => e.target.value)}>
+                <select name="" id="citiesLists" onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setGetFetchCityCode((_prevGetFetchCityCode) => e.target.value);
+                }}>
                     {cities.map(city => (
                         <option key={city.id} label={city.name} value={city.id}>{city.name}</option>
                     ))}

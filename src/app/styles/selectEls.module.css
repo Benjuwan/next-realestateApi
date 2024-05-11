@@ -1,3 +1,8 @@
+.actionLists {
+    display: block;
+    margin: 2.5em auto;
+}
+
 .SelectElsWrapper {
     color: #333;
     background-color: #b0b0b0;

@@ -1,7 +1,6 @@
 import baseStyles from "./styles/page.module.css";
 import ProjectExplain from "./components/elements/ProjectExplain";
 import SelectAction from "./utils/SelectAction";
-import SelectEls from "./components/elements/SelectEls";
 
 export default async function Home() {
   return (
@@ -10,7 +9,7 @@ export default async function Home() {
       <section>
         <ProjectExplain />
         <SelectAction />
-        <SelectEls />
+        {/* <SelectEls /> */}
       </section>
     </main>
   );
