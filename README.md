@@ -13,16 +13,16 @@
   グラフ表示を行う際にログにエラーが出る（`recharts`で使用している`XAxis`に対するエラー）
 
 ## 技術スタック
-- types/node@20.12.7
+- @types/node@20.12.7
 - @types/react-dom@18.2.25
 - @types/react@18.2.79
 - eslint-config-next@14.2.3
 - eslint@8.57.0
-- next@14.2.3
+- next@14.2.23
 - react-dom@18.2.0
 - react@18.2.0
 - recharts@2.12.6
-- styled-components@6.1.8（※`next.config.mjs`にコンパイルに必要な設定を記述している）
+- styled-components@6.1.8
 - typescript@5.4.5
 
 - 不動産取引価格情報
