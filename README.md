@@ -13,7 +13,7 @@
   グラフ表示を行う際にログにエラーが出る（`recharts`で使用している`XAxis`に対するエラー）
 
 ## 技術スタック
-- @types/node@20.12.7
+- @types/node@22.13.4
 - @types/react-dom@18.2.25
 - @types/react@18.2.79
 - eslint-config-next@14.2.3
