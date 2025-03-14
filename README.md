@@ -1,7 +1,5 @@
 # Next.js-realEstateApi
 
-[https://github.com/Benjuwan/realEstateApi](https://github.com/Benjuwan/realEstateApi)で制作した`React`app の`Next.js`ver（※使用していたAPIの廃止に伴って`Next.js`で新規作成）
-
 ## 概要
 日本各地の不動産取引データを取得するサイトです。国交省の「[不動産情報ライブラリ](https://www.reinfolib.mlit.go.jp/)」ページのAPIを使ってデータを取得しています。
 
