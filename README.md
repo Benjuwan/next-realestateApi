@@ -1,6 +1,4 @@
 # Next.js-realEstateApi
-
-## 概要
 日本各地の不動産取引データを取得するサイトです。国交省の「[不動産情報ライブラリ](https://www.reinfolib.mlit.go.jp/)」ページのAPIを使ってデータを取得しています。
 
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
@@ -11,17 +9,23 @@
   グラフ表示を行う際にログにエラーが出る（`recharts`で使用している`XAxis`に対するエラー）
 
 ## 技術スタック
-- @types/node@22.13.4
-- @types/react-dom@18.2.25
-- @types/react@18.2.79
+- @types/node@22.13.13
+- @types/react-dom@18.3.5
+- @types/react@18.3.20
 - eslint-config-next@14.2.3
-- eslint@8.57.0
-- next@14.2.23
-- react-dom@18.2.0
-- react@18.2.0
-- recharts@2.12.6
-- styled-components@6.1.8
-- typescript@5.4.5
+- eslint@8.57.1
+- next@14.2.25
+- react-dom@18.3.1
+- react@18.3.1
+- recharts@2.15.1
+- styled-components@6.1.16
+- typescript@5.8.2
+
+> [!NOTE]
+> - `npm audit`で定期的に脆弱性のチェックを行う
+> - `npm update`で定期的に（互換性を維持した）更新を行う
+>   - `^`（キャレット：「指定されたバージョンからメジャーバージョンを変更しない範囲で最新のバージョンまでを許容」する機能を示す記号）が付いていても油断せず定期的にチェックする<br>例：`"next": "^14.2.12"`の場合、14.2.12以上 15.0.0未満のバージョンが許容される
+> - `npm outdated`で表示される`Current`と`Wanted`の内容が等しいのが望ましい
 
 - 不動産取引価格情報
   - ~~[土地総合情報システム](https://www.land.mlit.go.jp/webland/api.html)~~
