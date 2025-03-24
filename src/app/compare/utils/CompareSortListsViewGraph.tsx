@@ -50,7 +50,7 @@ function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_vie
                 getChartDataSrc.push({ name: '', uv: 0 }); // chart 表示用のオブジェクト配列（一次配列）に取得した年間データ分の{object 要素}を追加
 
                 /* 追加した{object 要素}に各年間データの内容を代入していく */
-                if (annualYear && averageTradePrice !== (null || undefined)) {
+                if (annualYear && averageTradePrice) {
                     getChartDataSrc[i].name = annualYear;
                     getChartDataSrc[i].uv = averageTradePrice;
                 }
