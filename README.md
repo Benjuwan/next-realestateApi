@@ -14,11 +14,10 @@
 - @types/react@18.3.20
 - eslint-config-next@14.2.3
 - eslint@8.57.1
-- next@14.2.25
+- next@14.2.26
 - react-dom@18.3.1
 - react@18.3.1
 - recharts@2.15.1
-- styled-components@6.1.16
 - typescript@5.8.2
 
 > [!NOTE]
