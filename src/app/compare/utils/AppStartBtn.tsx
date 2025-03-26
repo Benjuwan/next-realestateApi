@@ -1,6 +1,7 @@
 /* 祖先コンポーネント（CompareComponent.tsx）でクライアントコンポーネントの宣言済みなので "use client" は不要 */
 
 import { memo, useContext } from "react";
+import compareStyle from "../../styles/compare.module.css";
 import { CompareSortGraphAction } from "@/app/providers/compare/CompareSortGraphAction";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
 import { useCalcAverageFee } from "@/app/hooks/useCalcAverageFee";
@@ -82,8 +83,8 @@ function AppStartBtn({ props }: { props: AppStartBtnType }) {
          * ソートをしようにも上記同様、随時処理（一つずつ生成）なのでソートできない
          * この2点から手続き的処理で進める
         */
-        const AverageCalcLists: HTMLUListElement | null = document.querySelector('.AverageCalcLists');
-        AverageCalcLists?.insertAdjacentHTML('afterbegin', `<li><span id="annualYear">${AverageCalcAry[0]}</span><span id="averageTradePrice">${AverageCalcAry[1]}</span></li>`);
+        const AverageCalcLists: HTMLUListElement | null = document.querySelector(`.${compareStyle.AverageCalcLists}`);
+        AverageCalcLists?.insertAdjacentHTML('afterbegin', `<li><span id="${compareStyle.annualYear}">${AverageCalcAry[0]}</span><span id="${compareStyle.averageTradePrice}">${AverageCalcAry[1]}</span></li>`);
 
         setSortGraphAction(false); // ソート＆グラフ表示ボタンの disabled を解除
     }
@@ -93,7 +94,7 @@ function AppStartBtn({ props }: { props: AppStartBtnType }) {
 
         if (termLists_from !== termLists_to && termLists_from < termLists_to) {
             /* 既にリストが存在する場合はリセットする */
-            const AverageCalcLists: HTMLUListElement | null = document.querySelector('.AverageCalcLists');
+            const AverageCalcLists: HTMLUListElement | null = document.querySelector(`.${compareStyle.AverageCalcLists}`);
             if (AverageCalcLists !== null && AverageCalcLists.childNodes.length > 0) AverageCalcLists.innerHTML = "";
 
             /* 計測終了期間から計測開始期間を差し引いて計測期間リストを生成 */
@@ -104,11 +105,12 @@ function AppStartBtn({ props }: { props: AppStartBtnType }) {
                 termLists.push(termValue);
             }
 
-            const citySelectEl: HTMLSelectElement | null = document.querySelector('#citiesLists');
+            const citySelectEl: HTMLSelectElement | null = document.querySelector('#CITIES_LISTS');
 
             /* 都道府県名・市区町村名の表示 */
-            const prefCityName = document.querySelector('#prefCityName');
-            const prefSelectEl: HTMLSelectElement | null = document.querySelector('#prefLists');
+            const prefCityName = document.querySelector(`#${compareStyle.prefCityName}`);
+            const prefSelectEl: HTMLSelectElement | null = document.querySelector('#PREF_LISTS');
+
             const prefSelectOption: NodeListOf<HTMLOptionElement> | undefined = prefSelectEl?.querySelectorAll('option');
             const citySelectOption: NodeListOf<HTMLOptionElement> | undefined = citySelectEl?.querySelectorAll('option');
             if (
@@ -117,16 +119,23 @@ function AppStartBtn({ props }: { props: AppStartBtnType }) {
             ) {
                 const prefName = _getPrefCityName(prefSelectOption, prefSelectEl);
                 const cityName = _getPrefCityName(citySelectOption, citySelectEl);
-                if (prefCityName !== null) prefCityName.innerHTML = `現在表示されているのは<span>「${prefName} ${cityName}」</span>の情報です。`;
+
+                if (prefCityName !== null) {
+                    prefCityName.innerHTML = `現在表示されているのは<span>「${prefName} ${cityName}」</span>の情報です。`;
+                }
             }
         }
     }
 
     return (
-        <button type="button" className="appStartBtn" disabled={isAppStartBtn} onClick={async () => {
-            async_serverAction_getPrefCompareYearData();
-            appStart();
-        }}>計測スタート</button>
+        <button
+            type="button"
+            className={compareStyle.appStartBtn}
+            disabled={isAppStartBtn}
+            onClick={async () => {
+                async_serverAction_getPrefCompareYearData();
+                appStart();
+            }}>計測スタート</button>
     );
 }
 

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { memo } from "react";
+import pagerStyle from "../../styles/pager.module.css";
 
 type BtnType = {
     btnTxt: string;
@@ -12,34 +12,15 @@ function BtnComponent({ props }: { props: BtnType }) {
     const { btnTxt, classNameTxt = 'default', ClickEvent, disabledBool } = props;
 
     return (
-        <BtnItem
+        <button
             type="button"
             disabled={disabledBool}
-            className={classNameTxt}
+            className={`${pagerStyle.BtnItem} ${classNameTxt}`}
             onClick={ClickEvent}
         >
             {btnTxt}
-        </BtnItem>
+        </button>
     );
 }
 
 export default memo(BtnComponent);
-
-const BtnItem = styled.button`
-width: 100%;
-appearance: none;
-border: 1px solid #333;
-background-color: #fff;
-border-radius: 4px;
-text-align: center;
-line-height: 2;
-
-&:not([disabled]){
-    cursor: pointer;
-    &:hover {
-        color: #fff;
-        background-color: #333;
-        border-color: transparent;
-    }
-}
-`;

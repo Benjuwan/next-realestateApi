@@ -11,7 +11,7 @@ function ContentsNumber({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     useEffect(() => {
         /* 次ページのコンテンツ数がオフセット数を下回っている場合は上限値をセット */
         if (isPagers > pagerLimitMaxNum - isOffSet) {
-            setCtrlPagerNum((_prevCtrlPagerNum) => pagerLimitMaxNum);
+            setCtrlPagerNum(pagerLimitMaxNum);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPagers]);

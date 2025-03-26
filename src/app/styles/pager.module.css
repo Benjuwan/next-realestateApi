@@ -1,0 +1,185 @@
+.ContentWrapper {
+    /* padding: 0 2em; */
+    font-size: 1.4rem;
+
+    & article {
+        border-radius: 4px;
+        padding: 1em;
+        background-color: #eaeaee;
+        margin-bottom: 2.5em;
+
+        & .boxes {
+            margin-bottom: 1em;
+        }
+
+        & .categories {
+            display: flex;
+            align-items: center;
+            gap: 2%;
+            line-height: 1.4;
+            color: #fff;
+
+            & h2,
+            & p {
+                font-weight: normal;
+                margin: 0;
+                padding: .25em 1em;
+                border-radius: 30px;
+                background-color: #333;
+                text-align: center;
+            }
+
+            & p {
+                background-color: #333;
+            }
+        }
+
+        & .infos,
+        & .otherInfo {
+            line-height: 1.6;
+
+            & p {
+                margin: 0;
+                border-left: 5px solid #333;
+                padding-left: .5em;
+
+                &:not(:last-of-type) {
+                    margin-bottom: 1em;
+                }
+            }
+        }
+    }
+}
+
+.Paginations {
+    width: 100%;
+    margin: 0 auto 1em;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2%;
+
+    & #currPage {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    & button {
+        cursor: pointer;
+        appearance: none;
+        border: 1px solid #dadada;
+        border-radius: 0;
+        background-color: #eaeaea;
+        min-width: 32px;
+        margin-bottom: .5em;
+
+        &:hover {
+            background-color: #333;
+            color: #fff;
+            border-color: #fff;
+        }
+    }
+}
+
+.PagerBaseElm {
+    width: clamp(320px, 100%, 960px);
+    margin: 0 auto 3em;
+}
+
+.BtnItem {
+    width: 100%;
+    appearance: none;
+    border: 1px solid #333;
+    background-color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 2;
+
+    &:not([disabled]) {
+        cursor: pointer;
+
+        &:hover {
+            color: #fff;
+            background-color: #333;
+            border-color: transparent;
+        }
+    }
+}
+
+.PagerArticleContents {
+    line-height: 2;
+    border-radius: 4px;
+    padding: 1em;
+    background-color: #eaeaee;
+    margin-bottom: 2.5em;
+
+    & .detailsViewBtn {
+        cursor: pointer;
+        appearance: none;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        background-color: #333;
+        color: #fff;
+        margin-top: 1em;
+        padding: .25em 1em;
+
+        &:hover {
+            background-color: #fff;
+            color: #333;
+            border-color: #333;
+        }
+    }
+
+    & .details {
+        width: 100%;
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        display: grid;
+        padding: 5em calc(100vw/5);
+        overflow-x: scroll;
+        overflow: hidden;
+        visibility: hidden;
+        height: 0;
+        background-color: rgba(255, 255, 255, .85);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+
+        &.OnView {
+            overflow: auto;
+            visibility: visible;
+            height: 100%;
+            z-index: 1;
+        }
+
+        & .categories {
+            display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .ContentWrapper {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 2%;
+
+        & article {
+            width: 49%;
+
+            & .categories {
+                width: 100%;
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .ContentWrapper {
+        font-size: 14px;
+
+        & article {
+            width: 32%;
+        }
+    }
+}

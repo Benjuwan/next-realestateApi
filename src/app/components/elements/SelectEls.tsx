@@ -1,7 +1,6 @@
 "use client"
-
-import selectElsStyles from "../../styles/selectEls.module.css";
 import { SyntheticEvent, memo, useContext } from "react";
+import selectElsStyles from "../../styles/selectEls.module.css";
 import { EstateInfoJsonDataContents } from "@/app/ts/estateInfoJsonData";
 import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
 import { GetFetchDataContext } from "@/app/providers/filter/GetFetchData";
@@ -30,7 +29,7 @@ function SelectEls({ isActionable }: { isActionable?: boolean }) {
                 return;
             }
             if (isGetFetchData.length > 0) resetPager();
-            setGetFetchData((_prevGetFetchData) => resObjDataAry);
+            setGetFetchData(resObjDataAry);
         }}>
             <SelectPrefCities />
             <SelectTerm props={{

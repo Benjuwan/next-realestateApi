@@ -1,7 +1,6 @@
 "use client"
-
-import loadingElStyle from '../styles/loadingEl.module.css';
 import { memo, useEffect } from "react";
+import loadingElStyle from '../styles/loadingEl.module.css';
 
 function LoadingEl() {
     /* ローディングテキストのアニメーション演出の準備と補助 */

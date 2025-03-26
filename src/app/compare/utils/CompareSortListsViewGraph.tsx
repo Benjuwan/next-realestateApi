@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { memo, useState, useContext } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts'; // https://recharts.org/en-US
+import compareStyle from "../../styles/compare.module.css";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { CompareSortGraphAction } from "../../providers/compare/CompareSortGraphAction";
 
 type CompareListsSortLists_viewGraphType = {
@@ -26,15 +26,18 @@ function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_vie
 
     /* 取得した各年の平均取引価格のソート及びグラフ表示メソッド */
     const sortLists_viewGraph: () => void = () => {
-        const AverageCalcListsLiEls: NodeListOf<HTMLLIElement> | undefined = document.querySelectorAll('.AverageCalcLists li'); // 計測結果リスト
+        const AverageCalcListsLiEls: NodeListOf<HTMLLIElement> | undefined = document.querySelectorAll(`.${compareStyle.AverageCalcLists} li`); // 計測結果リスト
+
         if (typeof AverageCalcListsLiEls !== "undefined") {
+            // 年数でソート
             const sortListEls: HTMLLIElement[] = Array.from(AverageCalcListsLiEls).sort((ahead, behind) => {
-                const aheadEl: number = Number(ahead.querySelector('#annualYear')?.textContent);
-                const behindEl: number = Number(behind.querySelector('#annualYear')?.textContent);
-                return behindEl - aheadEl; // 年数でソート
+                // id属性
+                const aheadEl: number = Number(ahead.querySelector(`#${compareStyle.annualYear}`)?.textContent);
+                const behindEl: number = Number(behind.querySelector(`#${compareStyle.annualYear}`)?.textContent);
+                return behindEl - aheadEl;
             });
 
-            const AverageCalcLists: HTMLUListElement | null = document.querySelector('.AverageCalcLists'); // 計測結果リストの親要素
+            const AverageCalcLists: HTMLUListElement | null = document.querySelector(`.${compareStyle.AverageCalcLists}`); // 計測結果リストの親要素
             if (AverageCalcLists !== null) {
                 AverageCalcLists.innerHTML = ""; // 親要素の中身をリセット
                 sortListEls.forEach(sortListEl => {
@@ -44,8 +47,11 @@ function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_vie
 
             /* chart 表示 */
             sortListEls.forEach((lists, i) => {
-                const annualYear: string | undefined | null = lists.querySelector('#annualYear')?.textContent;
-                const averageTradePrice: number | undefined | null = Number(lists.querySelector('#averageTradePrice')?.textContent?.split(',').join('')); // 平均価格の文字列からカンマを取り除いて数値型に変換
+                // id属性
+                const annualYear: string | undefined | null = lists.querySelector(`#${compareStyle.annualYear}`)?.textContent;
+
+                // id属性
+                const averageTradePrice: number | undefined | null = Number(lists.querySelector(`#${compareStyle.averageTradePrice}`)?.textContent?.split(',').join('')); // 平均価格の文字列からカンマを取り除いて数値型に変換
 
                 getChartDataSrc.push({ name: '', uv: 0 }); // chart 表示用のオブジェクト配列（一次配列）に取得した年間データ分の{object 要素}を追加
 
@@ -56,17 +62,22 @@ function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_vie
                 }
             });
             const Adjust_getChartDataSrc = getChartDataSrc.reverse(); // 一次配列の中身を反転
-            setChartData((_prevChartData) => Adjust_getChartDataSrc); //（isChartData のリセット処理を記述していないため）処理ごとに倍数されるのでスプレッド構文（[...isChartData, ...getChartDataSrc]）は使用しない
+            setChartData(Adjust_getChartDataSrc); //（isChartData のリセット処理を記述していないため）処理ごとに倍数されるのでスプレッド構文（[...isChartData, ...getChartDataSrc]）は使用しない
             setViewChart(true); // chart コンポーネントを表示
         }
     }
 
     return (
-        <SortListsViewGraphWrapper>
-            <button type="button" className="sortLists_viewGraphBtn" disabled={isSortGraphAction} onClick={sortLists_viewGraph}>ソート&amp;グラフを表示</button>
+        <div className={compareStyle.SortListsViewGraphWrapper}>
+            <button
+                type="button"
+                className={compareStyle.sortLists_viewGraphBtn}
+                disabled={isSortGraphAction}
+                onClick={sortLists_viewGraph}
+            >ソート&amp;グラフを表示</button>
             <p>計測結果は随時追加されていきます。指定した計測年数データが揃った後にソート&amp;グラフ表示してください。</p>
             {isViewChart &&
-                <div className="LineChartWrapper">
+                <div className={compareStyle.LineChartWrapper}>
                     <LineChart width={600} height={300} data={isChartData}>
                         <Line type="monotone" dataKey="uv" stroke="#8884d8" />
                         <CartesianGrid stroke="#ccc" />
@@ -75,72 +86,9 @@ function CompareSortListsViewGraph({ props }: { props: CompareListsSortLists_vie
                     </LineChart>
                 </div>
             }
-            <ul className="AverageCalcLists"></ul>
-        </SortListsViewGraphWrapper>
+            <ul className={compareStyle.AverageCalcLists}></ul>
+        </div>
     );
 }
 
 export default memo(CompareSortListsViewGraph);
-
-const SortListsViewGraphWrapper = styled.div`
-& .sortLists_viewGraphBtn {
-    margin-bottom: .5em;
-
-    & + p {
-        font-size: 12px;
-        margin-bottom: 1em;
-    }
-}
-
-& .LineChartWrapper {
-    overflow-x: scroll;
-    padding: 1em;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-
-    @media screen and (min-width: 700px) {
-        overflow-x: unset;
-        font-size: 14px;
-
-        & svg {
-            overflow: unset;
-        }
-    }
-}
-
-& .AverageCalcLists {
-    list-style: none;
-    font-size: 1.4rem;
-    line-height: 1.6;
-    margin-bottom: 2.5em;
-    padding-top: 1em;
-
-    & li {
-        &:not(:last-of-type){
-            border-bottom: 1px solid #dadada;
-            padding-bottom: .5em;
-            margin-bottom: .5em;
-        }
-
-        & span {
-            &#annualYear {
-                font-weight: bold;
-
-                &::after {
-                    content: "：";
-                }
-            }
-
-            &#averageTradePrice {
-                &::before {
-                    content: "￥";
-                }
-            }
-        }
-    }
-
-    @media screen and (min-width: 1025px) {
-        font-size: 14px;
-    }
-}
-`;

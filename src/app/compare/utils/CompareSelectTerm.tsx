@@ -1,4 +1,5 @@
 import { memo, useState, useEffect, ChangeEvent } from "react";
+import compareStyle from "../../styles/compare.module.css";
 import AppStartBtn from "./AppStartBtn";
 
 type CompareSelectTermType = {
@@ -18,7 +19,7 @@ function CompareSelectTerm({ props }: { props: CompareSelectTermType }) {
         selectYearsAry.push(`${startYear + i}`);
     }
     useEffect(() => {
-        setSelectYears((_prevSelectYearsAry) => selectYearsAry);
+        setSelectYears(selectYearsAry);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -36,16 +37,16 @@ function CompareSelectTerm({ props }: { props: CompareSelectTermType }) {
         setTermLists: React.Dispatch<React.SetStateAction<number>>
     ) => {
             const selectElValue: number = parseInt(selectEl.currentTarget.value);
-            setTermLists((_prevTermListsValue) => selectElValue);
+            setTermLists(selectElValue);
         }
 
     /* 計測スタートボタンの disabled 関連の処理 */
     const [isAppStartBtn, setAppStartBtn] = useState<boolean>(true);
     const formEvent: (formEl: ChangeEvent<HTMLFormElement>) => void = (formEl: ChangeEvent<HTMLFormElement>) => {
         formEl.preventDefault();
-        const termFrom: HTMLSelectElement | null = formEl.currentTarget.querySelector('#termLists_from');
+        const termFrom: HTMLSelectElement | null = formEl.currentTarget.querySelector('#TERMLISTS_FROM');
         const fromValue: number = Number(termFrom?.value);
-        const termTo: HTMLSelectElement | null = formEl.currentTarget.querySelector('#termLists_to');
+        const termTo: HTMLSelectElement | null = formEl.currentTarget.querySelector('#TERMLISTS_TO');
         const toValue: number = Number(termTo?.value);
 
         /* 計測期間が同じでなく終了期間の方が大きい（過去 < 未来となっている）場合は disabled 解除。そうでない場合は disabled 付与 */
@@ -58,17 +59,17 @@ function CompareSelectTerm({ props }: { props: CompareSelectTermType }) {
 
     return (
         <>
-            <form action="" className="CompareSelectTerm" onChange={(formEl: ChangeEvent<HTMLFormElement>) => {
+            <form action="" className={compareStyle.CompareSelectTerm} onChange={(formEl: ChangeEvent<HTMLFormElement>) => {
                 formEvent(formEl);
             }}>
-                <select name="" id="termLists_from" onChange={(selectEl: ChangeEvent<HTMLSelectElement>) => {
+                <select name="termLists_from" id="TERMLISTS_FROM" onChange={(selectEl: ChangeEvent<HTMLSelectElement>) => {
                     selectTermEvent(selectEl, setTermLists_from);
                 }}>
                     {isSelectYears.map((optionEl, i) => (
                         <option key={i} value={optionEl}>{optionEl}</option>
                     ))}
                 </select>
-                <select name="" id="termLists_to" onChange={(selectEl: ChangeEvent<HTMLSelectElement>) => {
+                <select name="termLists_to" id="TERMLISTS_TO" onChange={(selectEl: ChangeEvent<HTMLSelectElement>) => {
                     selectTermEvent(selectEl, setTermLists_to);
                 }}>
                     {isSelectYears.map((optionEl, i) => (
