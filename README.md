@@ -3,11 +3,6 @@
 
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
 
-## ToFix
-- 本番環境では一切問題ないが開発（`npm run dev`）環境では下記コンポーネントにて**挙動に影響を及ぼさないエラーが発生**する
-  - `CompareSortListsViewGraph.tsx`（src\app\compare\utils\CompareSortListsViewGraph.tsx）<br />
-  グラフ表示を行う際にログにエラーが出る（`recharts`で使用している`XAxis`に対するエラー）
-
 ## 技術スタック
 - @types/node@22.13.13
 - @types/react-dom@18.3.5
