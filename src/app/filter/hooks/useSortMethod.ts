@@ -20,7 +20,7 @@ export const useSortMethod = () => {
     const ascClick: () => void = () => {
         const askAry: EstateInfoJsonDataContents[] | undefined = _SortMethod('昇順');
         if (askAry !== undefined) {
-            setGetFetchData((_prevAry) => askAry);
+            setGetFetchData(askAry);
         }
     }
 
@@ -28,7 +28,7 @@ export const useSortMethod = () => {
     const deskClick: () => void = () => {
         const deskAry: EstateInfoJsonDataContents[] | undefined = _SortMethod('降順');
         if (deskAry !== undefined) {
-            setGetFetchData((_prevAry) => deskAry);
+            setGetFetchData(deskAry);
         }
     }
 

@@ -4,9 +4,9 @@ export type FetchCityData = {
     message?: {
         insufficient: string;
     }
-}
+};
 
 export type CityAry = {
     id: string;
     name: string;
-}
+};

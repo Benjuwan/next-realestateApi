@@ -4,7 +4,7 @@ export type EstateInfoJsonData = {
     message?: {
         insufficient: string;
     }
-}
+};
 
 export type EstateInfoJsonDataContents = {
     Area: string;
@@ -34,4 +34,4 @@ export type EstateInfoJsonDataContents = {
     Use: string;
     Breadth?: string;
     Remarks?: string;
-}
+};

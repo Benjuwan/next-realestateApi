@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { useState, useEffect, useContext, memo } from "react";
+import pagerStyle from "../../styles/pager.module.css";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 
 function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
@@ -18,8 +18,8 @@ function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
         pagerEl: number
     ) => {
         const dataPager: string | null = btnEl.currentTarget.getAttribute('data-pager');
-        setPagers((_prevPagerNum) => Number(dataPager));
-        setCurrPager((_prevCurrPager) => pagerEl); // 表示中のページ番号を変更
+        setPagers(Number(dataPager));
+        setCurrPager(pagerEl); // 表示中のページ番号を変更
     }
 
     /* オフセット数に基づいた計算を通してページネーション用の各ページャー項目のページを設定する */
@@ -34,13 +34,13 @@ function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
             Accumuration++;
             srcNum = srcNum - isOffSet;
         }
-        setPagerNum((_prevPagerNum) => srcAry); // ページャー数をセット
+        setPagerNum(srcAry); // ページャー数をセット
 
         const paginationAry: number[] = [];
         for (let i = 1; i <= srcAry.length; i++) {
             paginationAry.push(i);
         }
-        setPagination((_prevPagination) => paginationAry); // ページ数をセット
+        setPagination(paginationAry); // ページ数をセット
     }
 
     useEffect(() => {
@@ -50,8 +50,8 @@ function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     }, [isCurrPager, pagerLimitMaxNum]); // 依存配列：現在表示中のページ及びコンテンツ数の上限値
 
     return (
-        <Paginations>
-            <p id="currPage">現在「{isCurrPager}」ページ目</p>
+        <div className={pagerStyle.Paginations}>
+            <p id={pagerStyle.currPage}>現在「{isCurrPager}」ページ目</p>
             {isPagination.map((pagerEl, i) =>
                 /* data-pager：ページャー数がセットされたカスタムデータ */
                 <button key={i}
@@ -63,37 +63,8 @@ function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
                     {pagerEl}
                 </button>
             )}
-        </Paginations>
+        </div>
     );
 }
 
 export default memo(Pagination);
-
-const Paginations = styled.div`
-width: 100%;
-margin: 0 auto 1em;
-display: flex;
-flex-flow: row wrap;
-gap: 2%;
-
-& #currPage{
-    font-size: 12px;
-    width: 100%;
-}
-
-& button{
-    cursor: pointer;
-    appearance: none;
-    border: 1px solid #dadada;
-    border-radius: 0;
-    background-color: #eaeaea;
-    min-width: 32px;
-    margin-bottom: .5em;
-
-    &:hover{
-        background-color: #333;
-        color: #fff;
-        border-color: #fff;
-    }
-}
-`;
