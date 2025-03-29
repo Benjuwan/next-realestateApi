@@ -3,3 +3,9 @@ export type PrefCodeType = {
     prefJaName: string;
     prefRomenName: string;
 };
+
+export type thePrefCityNameType = {
+    prefname: string;
+    cityname: string;
+    selectChange?: boolean;
+};

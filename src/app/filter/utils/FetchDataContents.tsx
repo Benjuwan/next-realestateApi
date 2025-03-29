@@ -15,6 +15,8 @@ function FetchDataContents() {
     /* fee を3桁区切りに */
     const { ToLocalString } = useToLocalString();
 
+    const TRADE_PRICE: string[] = [...isGetFetchData].map(data => ToLocalString(data.TradePrice));
+
     /* h2 のスタイル */
     const headingStyle: object = {
         'fontSize': '18px',
@@ -28,7 +30,7 @@ function FetchDataContents() {
             {isGetFetchData.length > 0 &&
                 <>
                     <FilterActionBtns />
-                    <h2 style={headingStyle}>{isCityName && <>「{isCityName}」の</>}平均取引価格「<AverageNumber />」</h2>
+                    <h2 style={headingStyle}>{isCityName && <>「{isCityName}」の</>}平均取引価格「<AverageNumber TRADE_PRICE={TRADE_PRICE} />」</h2>
                     <p>件数：{isGetFetchData.length}</p>
                 </>
             }
@@ -40,7 +42,7 @@ function FetchDataContents() {
                     }} />
                     <div className={filterStyle.place}>
                         <p className={filterStyle.DistrictName}>{el.Municipality}{el.DistrictName}</p>
-                        <p>￥<span className='TRADE_PRICE'>{ToLocalString(el.TradePrice)}</span></p>
+                        <p>￥<span>{ToLocalString(el.TradePrice)}</span></p>
                     </div>
                     <HiddenDetailsContent aryEl={el} typeName="filter" />
                 </div>))}

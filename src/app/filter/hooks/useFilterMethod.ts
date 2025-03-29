@@ -41,15 +41,6 @@ export const useFilterMethod = () => {
     /* データリセット */
     const ResetFilter: () => void = () => {
         setGetFetchData([]); // フィルターのかかったデータを一旦削除（配列を空に）
-
-        /* 都道府県 select を初期値に戻す */
-        const prefListsOptions: NodeListOf<HTMLOptionElement> | null = document.querySelectorAll('#PREF_LISTS option');
-        prefListsOptions.forEach(optionEl => {
-            optionEl.removeAttribute('selected');
-            if (optionEl.value === '01') {
-                optionEl.setAttribute('selected', 'true');
-            }
-        });
         setGetFetchPrefCode('01'); // 都道府県コードを初期値に戻す
     }
 
