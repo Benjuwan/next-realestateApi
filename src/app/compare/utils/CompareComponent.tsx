@@ -1,13 +1,23 @@
 "use client"
-import { memo, useState } from "react";
+import { memo, useContext, useState } from "react";
 import compareStyle from "../../styles/compare.module.css";
 import CompareSelectTerm from "./CompareSelectTerm";
 import CompareSortListsViewGraph from "./CompareSortListsViewGraph";
 import SelectPrefCities from "@/app/components/elements/SelectPrefCities";
+import { GetFetchEachCode } from "@/app/providers/filter/GetFetchEachCode";
+
+export type AverageCalcListType = {
+    averageCalcEl: (string | number)[];
+};
 
 function CompareComponent() {
+    const { thePrefCityName } = useContext(GetFetchEachCode);
+
     /* chart コンポーネント表示判定用の State */
     const [isViewChart, setViewChart] = useState<boolean>(false);
+
+    /*（年数ごとの）平均価格リスト */
+    const [averageCalcLists, setAverageCalcLists] = useState<AverageCalcListType[]>([]);
 
     return (
         <div className={compareStyle.CompareComponentEl}>
@@ -16,7 +26,9 @@ function CompareComponent() {
                     <SelectPrefCities />
                     <CompareSelectTerm props={{
                         isViewChart: isViewChart,
-                        setViewChart: setViewChart
+                        setViewChart: setViewChart,
+                        averageCalcLists: averageCalcLists,
+                        setAverageCalcLists: setAverageCalcLists
                     }} />
                 </div>
                 <div className={compareStyle.explain}>
@@ -27,11 +39,25 @@ function CompareComponent() {
                     <li>2：「ソート&amp;グラフを表示」ボタンを押すと取得データがソート及びグラフ表示されます。</li>
                 </ul>
             </div>
-            <p id={compareStyle.prefCityName}></p>
+            {thePrefCityName.selectChange ||
+                <p id={compareStyle.thePrefCityName}>現在表示されているのは<span>「{thePrefCityName.prefname} {thePrefCityName.cityname}」</span>の情報です。</p>
+            }
             <CompareSortListsViewGraph props={{
                 isViewChart: isViewChart,
-                setViewChart: setViewChart
+                setViewChart: setViewChart,
+                averageCalcLists: averageCalcLists,
+                setAverageCalcLists: setAverageCalcLists
             }} />
+            {averageCalcLists.length > 0 &&
+                <ul className={compareStyle.AverageCalcLists}>
+                    {averageCalcLists.map((averageCalcList, i) => (
+                        <li key={i}>
+                            <span className={compareStyle.annualYear}>{averageCalcList.averageCalcEl[0]}</span>
+                            <span className={compareStyle.averageTradePrice}>{averageCalcList.averageCalcEl[1]}</span>
+                        </li>
+                    ))}
+                </ul>
+            }
         </div>
     );
 }

@@ -6,8 +6,11 @@ export const useCalcAverageFee = () => {
     ) => {
         /* . を年間数値（annualYear）へ置換 */
         const replaceannualYearAry: (string | number)[] = [...resElAry].map(dataEl => {
-            if (dataEl === '.') return annualYear;
-            else return dataEl;
+            if (dataEl === '.') {
+                return annualYear;
+            }
+
+            return dataEl;
         });
         // console.log(replaceannualYearAry);
 
@@ -27,7 +30,7 @@ export const useCalcAverageFee = () => {
         if (!Number.isNaN(averageNumber)) {
             averageResultStr = `${Math.floor(averageNumber).toLocaleString()}`;
         }
-        
+
         // console.log(annualYear, averageResultStr);
         return [annualYear, averageResultStr];
     }

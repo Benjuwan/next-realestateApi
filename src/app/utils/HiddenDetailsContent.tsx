@@ -1,20 +1,19 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import pagerStyle from "../styles/pager.module.css";
 import filterStyle from "../styles/filter.module.css";
 import { EstateInfoJsonDataContents } from "../ts/estateInfoJsonData";
 import ContentItmes from "../components/layout/ContentItmes";
-import { useViewDetails } from "../hooks/useViewDetails";
 
 function HiddenDetailsContent({ aryEl, typeName }: { aryEl: EstateInfoJsonDataContents, typeName: string }) {
     const targetModuleStyle = typeName === 'pager' ? pagerStyle : filterStyle;
 
-    /* 詳細情報の表示機能（モーダル）*/
-    const { ViewDetails } = useViewDetails(typeName);
+    const [isOnview, setOnview] = useState<boolean>(false);
+    const handleViewDetails: () => void = () => setOnview(!isOnview);
 
     return (
         <>
-            <button type="button" className={targetModuleStyle.detailsViewBtn} onClick={((btnEl) => ViewDetails(btnEl.currentTarget))}>詳細情報</button>
-            <div className={targetModuleStyle.details} onClick={((divEl) => ViewDetails(divEl.currentTarget))}>
+            <button type="button" className={isOnview ? `${targetModuleStyle.detailsViewBtn} ${targetModuleStyle.OnView}` : targetModuleStyle.detailsViewBtn} onClick={handleViewDetails}>詳細情報</button>
+            <div className={isOnview ? `${targetModuleStyle.details} ${targetModuleStyle.OnView}` : targetModuleStyle.details} onClick={handleViewDetails}>
                 <div className={targetModuleStyle.contentsWrapper}>
                     <ContentItmes aryEl={aryEl} />
                 </div>
