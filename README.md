@@ -4,16 +4,16 @@
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
 
 ## 技術スタック
-- @types/node@22.13.13
-- @types/react-dom@18.3.5
+- @types/node@22.14.0
+- @types/react-dom@18.3.6
 - @types/react@18.3.20
 - eslint-config-next@14.2.3
 - eslint@8.57.1
-- next@14.2.26
+- next@14.2.28
 - react-dom@18.3.1
 - react@18.3.1
-- recharts@2.15.1
-- typescript@5.8.2
+- recharts@2.15.2
+- typescript@5.8.3
 
 > [!NOTE]
 > - `npm audit`で定期的に脆弱性のチェックを行う
