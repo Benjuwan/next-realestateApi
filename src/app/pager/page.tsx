@@ -1,5 +1,5 @@
-import baseStyles from "../styles/page.module.css";
-import PagerBaseComponent from "./utils/PagerBaseComponent";
+import baseStyles from "../../styles/page.module.css";
+import PagerBaseComponent from "../../utils/pager/PagerBaseComponent";
 
 export default async function PagerPage() {
   return (

@@ -1,12 +1,12 @@
-import './styles/globals.css';
+import '../styles/globals.css';
 import type { Metadata } from "next";
-import { CompareSortGraphActionFragment } from "./providers/compare/CompareSortGraphAction";
-import { CityNameFragment } from "./providers/filter/CityName";
-import { GetFetchDataContextFragment } from "./providers/filter/GetFetchData";
-import { GetFetchEachCodeFragment } from "./providers/filter/GetFetchEachCode";
 import { Suspense } from "react";
+import { CompareSortGraphActionFragment } from '@/providers/compare/CompareSortGraphActionFragment';
+import { CityNameFragment } from '@/providers/filter/CityNameFragment';
+import { GetFetchDataContextFragment } from '@/providers/filter/GetFetchDataFragment';
+import { GetFetchEachCodeFragment } from '@/providers/filter/GetFetchEachCodeFragment';
+import Header from '@/components/layout/header/Header';
 import Loading from "./loading";
-import Header from './components/layout/header/Header';
 
 export const metadata: Metadata = {
   title: "不動産取引データ取得機能",

@@ -4,15 +4,15 @@
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
 
 ## 技術構成
-- @types/node@22.15.29
+- @types/node@22.15.33
 - @types/react-dom@18.3.7
 - @types/react@18.3.23
 - eslint-config-next@14.2.3
 - eslint@8.57.1
-- next@15.3.3
+- next@15.3.4
 - react-dom@18.3.1
 - react@18.3.1
-- recharts@2.15.3
+- recharts@2.15.4
 - typescript@5.8.3
 
 > [!NOTE]

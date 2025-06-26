@@ -1,5 +1,5 @@
-import baseStyles from "../styles/page.module.css";
-import CompareComponent from "./utils/CompareComponent";
+import baseStyles from "../../styles/page.module.css";
+import CompareComponent from "../../utils/compare/CompareComponent";
 
 export default async function comparePage() {
   return (

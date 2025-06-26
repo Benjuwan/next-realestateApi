@@ -1,6 +1,6 @@
-import baseStyles from "./styles/page.module.css";
-import ProjectExplain from "./components/elements/ProjectExplain";
-import SelectAction from "./utils/SelectAction";
+import baseStyles from "../styles/page.module.css";
+import ProjectExplain from "@/components/elements/ProjectExplain";
+import SelectAction from "@/utils/SelectAction";
 
 export default async function Home() {
   return (
@@ -9,7 +9,6 @@ export default async function Home() {
       <section>
         <ProjectExplain />
         <SelectAction />
-        {/* <SelectEls /> */}
       </section>
     </main>
   );
