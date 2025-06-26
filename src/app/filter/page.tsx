@@ -1,5 +1,5 @@
-import baseStyles from "../styles/page.module.css";
-import FilterComponent from "./utils/FilterComponent";
+import baseStyles from "../../styles/page.module.css";
+import FilterComponent from "../../utils/filter/FilterComponent";
 
 export default async function FilterPage() {
   return (
