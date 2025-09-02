@@ -1,4 +1,5 @@
 "use client"
+
 import { SyntheticEvent, memo, useContext } from "react";
 import selectElsStyles from "../../styles/selectEls.module.css";
 import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";

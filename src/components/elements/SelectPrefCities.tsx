@@ -1,4 +1,3 @@
-// "use client"
 /* 親コンポーネント（SelectEls.tsx）でクライアントコンポーネントの宣言済みなので再度 "use client" は不要 */
 
 import React, { useContext, useEffect, useState, ChangeEvent, memo, useRef } from 'react';
