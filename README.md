@@ -4,6 +4,7 @@
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
 
 ## 技術構成
+- @eslint/eslintrc@3.3.1
 - @types/node@22.18.0
 - @types/react-dom@18.3.7
 - @types/react@18.3.24
