@@ -5,18 +5,18 @@
 
 ## 技術構成
 - @eslint/eslintrc@3.3.1
-- @types/node@22.18.4
+- @types/node@22.18.8
 - @types/react-dom@18.3.7
-- @types/react@18.3.24
-- @typescript-eslint/eslint-plugin@8.44.0
-- @typescript-eslint/parser@8.44.0
-- eslint-config-next@15.5.3
+- @types/react@18.3.25
+- @typescript-eslint/eslint-plugin@8.45.0
+- @typescript-eslint/parser@8.45.0
+- eslint-config-next@15.5.4
 - eslint@8.57.1
-- next@15.5.3
+- next@15.5.4
 - react-dom@18.3.1
 - react@18.3.1
 - recharts@2.15.4
-- typescript@5.9.2
+- typescript@5.9.3
 
 > [!NOTE]
 > - `npm audit`で定期的に脆弱性のチェックを行う
