@@ -15,6 +15,25 @@ function SelectPrefCities() {
 
     const [cities, setCities] = useState<CityAry[]>([]);
 
+    /* 選択した都道府県に準ずる市区町村のデータフェッチ及びセット処理 */
+    const fetchCityCode = async (): Promise<void> => {
+        const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(isGetFetchPrefCode);
+        if (typeof resObjDataAry !== "undefined") {
+            setGetFetchCityCode(resObjDataAry[0].id);
+            setCities(resObjDataAry);
+        }
+    }
+
+    /* 都道府県と対応する市区町村を反映（更新）する非同期処理 */
+    const changePrefAndCites = async (e: ChangeEvent<HTMLSelectElement>): Promise<void> => {
+        const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(e.target.value);
+        setGetFetchPrefCode(e.target.value);
+        if (typeof resObjDataAry !== "undefined") {
+            setCities(resObjDataAry);
+            handlePrefCityName(e, resObjDataAry);
+        }
+    }
+
     /* 都道府県名と市区町村名をセット */
     const handlePrefCityName: (e?: ChangeEvent<HTMLSelectElement>, fetchedData?: CityAry[]) => void = (
         e?: ChangeEvent<HTMLSelectElement>,
@@ -57,14 +76,6 @@ function SelectPrefCities() {
         /* 比較機能時において「都道府県名と市区町村名を非表示」にする */
         setPrefCityName({ ...thePrefCityName, selectChange: true });
 
-        /* 選択した都道府県に準ずる市区町村のデータフェッチ及びセット処理 */
-        const fetchCityCode = async () => {
-            const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(isGetFetchPrefCode);
-            if (typeof resObjDataAry !== "undefined") {
-                setGetFetchCityCode(resObjDataAry[0].id);
-                setCities(resObjDataAry);
-            }
-        }
         fetchCityCode();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGetFetchPrefCode]);
@@ -76,14 +87,7 @@ function SelectPrefCities() {
                     name="PREF_LISTS"
                     ref={prefcodeDataRef}
                     id="PREF_LISTS"
-                    onChange={async (e: ChangeEvent<HTMLSelectElement>) => {
-                        const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(e.target.value);
-                        setGetFetchPrefCode(e.target.value);
-                        if (typeof resObjDataAry !== "undefined") {
-                            setCities(resObjDataAry);
-                            handlePrefCityName(e, resObjDataAry);
-                        }
-                    }}
+                    onChange={changePrefAndCites}
                 >
                     {prefcodeData.map((data) => (
                         <option value={data.prefcode} key={data.prefcode}>{data.prefJaName}</option>
