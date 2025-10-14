@@ -5,17 +5,17 @@
 
 ## 技術構成
 - @eslint/eslintrc@3.3.1
-- @types/node@22.18.8
-- @types/react-dom@18.3.7
-- @types/react@18.3.25
-- @typescript-eslint/eslint-plugin@8.45.0
-- @typescript-eslint/parser@8.45.0
-- eslint-config-next@15.5.4
+- @types/node@22.18.10
+- @types/react-dom@19.2.2
+- @types/react@19.2.2
+- @typescript-eslint/eslint-plugin@8.46.1
+- @typescript-eslint/parser@8.46.1
+- eslint-config-next@15.5.5
 - eslint@8.57.1
-- next@15.5.4
-- react-dom@18.3.1
-- react@18.3.1
-- recharts@2.15.4
+- next@15.5.5
+- react-dom@19.2.0
+- react@19.2.0
+- recharts@3.2.1
 - typescript@5.9.3
 
 > [!NOTE]
