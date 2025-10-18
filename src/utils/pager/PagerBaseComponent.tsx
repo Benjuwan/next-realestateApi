@@ -10,7 +10,6 @@ function PagerBaseComponent() {
     const [pagerLimitMaxNum, setPagerLimitMaxNum] = useState<number>(0);
     useEffect(() => {
         setPagerLimitMaxNum(isGetFetchData.length);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGetFetchData]);
 
     return (
