@@ -38,6 +38,14 @@ function Pagination({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
 
         const paginationAry: number[] = [];
         for (let i = 1; i <= srcAry.length; i++) {
+            const isFinalIterTurn: boolean = i === srcAry.length;
+            const currFinalPagerBtnOffset: number = srcAry.at(-1) ?? 0;
+            if (isFinalIterTurn && pagerLimitMaxNum - currFinalPagerBtnOffset <= 0) {
+                // 「ループ処理の最後」かつ「コンテンツがもう存在しない」（コンテンツ数と現状最終オフセット数の差が0以下になる）場合
+                // 処理スキップしてページャーボタンを生成しない
+                continue;
+            }
+
             paginationAry.push(i);
         }
         setPagination(paginationAry); // ページ数をセット
