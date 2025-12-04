@@ -8,14 +8,14 @@
 - @types/node@24.10.1
 - @types/react-dom@19.2.3
 - @types/react@19.2.7
-- @typescript-eslint/eslint-plugin@8.48.0
-- @typescript-eslint/parser@8.48.0
-- baseline-browser-mapping@2.8.32
-- eslint-config-next@16.0.5
+- @typescript-eslint/eslint-plugin@8.48.1
+- @typescript-eslint/parser@8.48.1
+- baseline-browser-mapping@2.9.0
+- eslint-config-next@16.0.7
 - eslint@9.39.1
-- next@16.0.5
-- react-dom@19.2.0
-- react@19.2.0
+- next@16.0.7
+- react-dom@19.2.1
+- react@19.2.1
 - recharts@3.5.1
 - typescript@5.9.3
 
