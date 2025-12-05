@@ -10,7 +10,6 @@
 - @types/react@19.2.7
 - @typescript-eslint/eslint-plugin@8.48.1
 - @typescript-eslint/parser@8.48.1
-- baseline-browser-mapping@2.9.0
 - eslint-config-next@16.0.7
 - eslint@9.39.1
 - next@16.0.7
