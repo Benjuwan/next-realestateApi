@@ -4,14 +4,16 @@
 - 公開サイト：[https://next-realestate-api.vercel.app/](https://next-realestate-api.vercel.app/)
 
 ## 技術構成
-- @eslint/eslintrc@3.3.3
-- @types/node@25.1.0
+- @eslint/eslintrc@3.3.4
+- @types/node@25.3.0
 - @types/react-dom@19.2.3
-- @types/react@19.2.10
-- @typescript-eslint/eslint-plugin@8.54.0
-- @typescript-eslint/parser@8.54.0
+- @types/react@19.2.14
+- @typescript-eslint/eslint-plugin@8.56.1
+- @typescript-eslint/parser@8.56.1
 - eslint-config-next@16.1.6
-- eslint@9.39.2
+- eslint-plugin-react-hooks@7.0.1
+- eslint-plugin-react@7.37.5
+- eslint@9.39.3
 - next@16.1.6
 - react-dom@19.2.4
 - react@19.2.4
