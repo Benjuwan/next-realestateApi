@@ -1,6 +1,6 @@
 /* 親コンポーネント（SelectEls.tsx）でクライアントコンポーネントの宣言済みなので再度 "use client" は不要 */
 
-import React, { useContext, useEffect, useState, ChangeEvent, memo, useRef } from 'react';
+import { useContext, useEffect, useState, ChangeEvent, memo, useRef } from 'react';
 import selectElsStyles from "../../styles/selectEls.module.css";
 import { GetFetchEachCode } from "../../providers/filter/GetFetchEachCode";
 import { CityAry } from "../../ts/cityDataAryEls";
@@ -78,7 +78,7 @@ function SelectPrefCities() {
 
         fetchCityCode();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isGetFetchPrefCode]);
+    }, []);
 
     return (
         <div className={selectElsStyles.termEls}>
