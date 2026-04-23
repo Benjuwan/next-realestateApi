@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, memo } from "react";
+import { useContext, memo } from "react";
 import pagerStyle from "../../styles/pager.module.css";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import { EstateInfoJsonDataContents } from "../../ts/estateInfoJsonData";
@@ -15,29 +15,18 @@ function PagerPages({ pagerLimitMaxNum }: { pagerLimitMaxNum: number }) {
     const { prevPagerPages, nextPagerPages } = usePager();
 
     /* ページャー機能：splice メソッドで処理 */
-    const [isPagerContents, setPagerContents] = useState<EstateInfoJsonDataContents[]>([]);
-    const setPagerContentsFrag: (fragStart: number, fragFinish: number) => void = (
+    const setPagerContentsFrag: (fragStart: number, fragFinish: number) => EstateInfoJsonDataContents[] = (
         fragStart: number, // 始点（fragStart）：ページャー数
         fragFinish: number // 終点（fragFinish）：オフセット数
     ) => {
         const shallowCopy: EstateInfoJsonDataContents[] = [...isGetFetchData];
         const splicedContents: EstateInfoJsonDataContents[] = shallowCopy.splice(fragStart, fragFinish);
-        setPagerContents(splicedContents);
+        return splicedContents
     }
 
-    useEffect(() => {
-        /* ページャー機能：ページ送り */
-        if (typeof pagerLimitMaxNum !== "undefined") {
-            const limitBorderLine: number = pagerLimitMaxNum - isOffSet;
-            if (isPagers >= limitBorderLine) {
-                const remandNum: number = pagerLimitMaxNum - isPagers;
-                setPagerContentsFrag(isPagers, remandNum); // 終点：残りのコンテンツ数
-            } else {
-                setPagerContentsFrag(isPagers, isOffSet);
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isPagers, pagerLimitMaxNum]);
+    const limitBorderLine: number = pagerLimitMaxNum - isOffSet;
+    const remandNum: number = pagerLimitMaxNum - isPagers;
+    const isPagerContents: EstateInfoJsonDataContents[] = isPagers >= limitBorderLine ? setPagerContentsFrag(isPagers, remandNum) : setPagerContentsFrag(isPagers, isOffSet);
 
     /* fee を3桁区切りに */
     const { ToLocalString } = useToLocalString();

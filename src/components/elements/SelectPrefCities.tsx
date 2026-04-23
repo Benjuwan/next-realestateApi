@@ -15,15 +15,6 @@ function SelectPrefCities() {
 
     const [cities, setCities] = useState<CityAry[]>([]);
 
-    /* 選択した都道府県に準ずる市区町村のデータフェッチ及びセット処理 */
-    const fetchCityCode = async (): Promise<void> => {
-        const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(isGetFetchPrefCode);
-        if (typeof resObjDataAry !== "undefined") {
-            setGetFetchCityCode(resObjDataAry[0].id);
-            setCities(resObjDataAry);
-        }
-    }
-
     /* 都道府県と対応する市区町村を反映（更新）する非同期処理 */
     const changePrefAndCites = async (e: ChangeEvent<HTMLSelectElement>): Promise<void> => {
         const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(e.target.value);
@@ -64,6 +55,15 @@ function SelectPrefCities() {
     }
 
     useEffect(() => {
+        /* 選択した都道府県に準ずる市区町村のデータフェッチ及びセット処理： Lintエラー対策でエフェクト内で非同期処理を宣言（作成） */
+        const fetchCityCode = async (): Promise<void> => {
+            const resObjDataAry: CityAry[] | undefined = await get_SelectElValue_CityCode(isGetFetchPrefCode);
+            if (typeof resObjDataAry !== "undefined") {
+                setGetFetchCityCode(resObjDataAry[0].id);
+                setCities(resObjDataAry);
+            }
+        }
+
         /* 選択した（または初期値の）都道府県コードに準拠した（都道府県名）項目に selected を付与 */
         const prefOption = prefcodeDataRef.current?.querySelectorAll('option');
         prefOption?.forEach(option => {
