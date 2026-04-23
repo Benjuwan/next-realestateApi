@@ -1,5 +1,5 @@
 "use client"
-import { useContext, memo, useState, useEffect } from "react";
+import { useContext, memo, useMemo } from "react";
 import pagerStyle from "../../styles/pager.module.css";
 import { GetFetchDataContext } from "../../providers/filter/GetFetchData";
 import SelectEls from "../../components/elements/SelectEls";
@@ -7,10 +7,7 @@ import PagerComponent from "./PagerComponent";
 
 function PagerBaseComponent() {
     const { isGetFetchData } = useContext(GetFetchDataContext);
-    const [pagerLimitMaxNum, setPagerLimitMaxNum] = useState<number>(0);
-    useEffect(() => {
-        setPagerLimitMaxNum(isGetFetchData.length);
-    }, [isGetFetchData]);
+    const pagerLimitMaxNum: number = useMemo(() => isGetFetchData.length, [isGetFetchData]);
 
     return (
         <div className={pagerStyle.PagerBaseElm}>
