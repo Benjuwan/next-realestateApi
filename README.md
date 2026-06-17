@@ -18,7 +18,7 @@
 - react-dom@19.2.7
 - react@19.2.7
 - recharts@3.8.1
-- typescript@5.9.3
+- typescript@6.0.3
 
 > [!NOTE]
 > - `npm audit`で定期的に脆弱性のチェックを行う
