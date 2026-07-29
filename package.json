@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@types/node": "^25.0.2",
+    "@types/node": "^26.1.2",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
@@ -26,5 +26,8 @@
     "eslint-config-next": "^16.0.1",
     "next": "^16.0.1",
     "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "postcss": "^8.5.18"
   }
 }
